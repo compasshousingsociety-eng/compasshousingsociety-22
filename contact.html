@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate</title>
+
+    <link rel="stylesheet" href="globalstyles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* ---------- GLOBAL DESIGN SYSTEM ---------- */
+        :root {
+            --primary-dark: #530C2D;
+            --primary-medium: #904567;
+            --white: #ffffff;
+            --black: #000000;
+            --gray-light: #f8f9fa;
+            --gray-medium: #6c757d;
+            --error: #dc3545;
+            --success: #28a745;
+        }
+
+        /* ----- TYPOGRAPHY – strict scale, no extra font sizes ----- */
+        h1 {
+            font-size: 42px;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        h3 {
+            font-size: 22px;
+        }
+
+        h4 {
+            font-size: 21px;
+        }
+
+        h5,
+        h6 {
+            font-size: 19px;
+        }
+
+        p,
+        span {
+            font-size: 17px;
+        }
+
+        li,
+        a,
+        label,
+        input,
+        select,
+        textarea,
+        button,
+        .error-message,
+        .popup-small,
+        .faq-icon {
+            font-size: 16px;
+        }
+
+        /* ----- SECTION STYLES – class based, padding 40px ----- */
+        .section-styles {
+            padding: 40px 0;
+            width: 100%;
+            font-family: "JetBrains Mono", "Cascadia Code", monospace;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            margin: 0;
+            transition: background 0.2s, color 0.2s;
+            font-family: "JetBrains Mono", "Cascadia Code", monospace;
+        }
+
+        /* ----- CONTACT FORM SECTION (inside section-styles) ----- */
+        .contact-form-section {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 50px 30px;
+            /* background: var(--white); */
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(83, 12, 45, 0.08);
+            border: 1px solid rgba(83, 12, 45, 0.1);
+        }
+
+        .section-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+        }
+
+
+
+        .section-header p {
+            /* color: var(--gray-medium); */
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ----- FORM ----- */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .form-group label i {
+            color: var(--primary-medium);
+            margin-right: 10px;
+        }
+
+        .required {
+            /* color: var(--primary-medium); */
+            margin-left: 4px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("images/transparent-logo-1.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 600px auto;
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        :root[data-theme="dark"] body::before {
+            opacity: 0.10;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--primary-medium);
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-medium);
+            box-shadow: 0 0 0 4px rgba(144, 69, 103, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--black);
+            font-size: 16px;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='%23904567'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            padding-right: 50px;
+            cursor: pointer;
+        }
+
+        /* validation states */
+        .form-control.error {
+            border-color: var(--error);
+            background: rgba(220, 53, 69, 0.02);
+        }
+
+        .form-control.success {
+            border-color: var(--success);
+            background: rgba(40, 167, 69, 0.02);
+        }
+
+        .error-message {
+            color: var(--error);
+            margin-top: 8px;
+            display: none;
+            padding-left: 5px;
+        }
+
+        .error-message i {
+            margin-right: 6px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .submit-btn {
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 40%;
+            margin-top: 30px;
+        }
+
+        .submit-btn i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(144, 69, 103, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ----- SUCCESS POPUP ----- */
+        .success-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid rgba(83, 12, 45, 0.1);
+        }
+
+        .success-popup.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .popup-content {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .popup-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .popup-icon i {
+            font-size: 40px;
+            color: white;
+        }
+
+        .popup-content h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .popup-content p {
+            color: var(--gray-medium);
+            margin-bottom: 5px;
+        }
+
+        .popup-small {
+            margin-top: 15px;
+            color: var(--primary-medium) !important;
+        }
+
+        /* ----- GOOGLE MAP SECTION (simple) ----- */
+        .map-container {
+            max-width: 1200px;
+            height: 400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .google-map {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(83, 12, 45, 0.1);
+        }
+
+        /* ----- FAQ SECTION (dropdown icons) ----- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-header h2 {
+            /* color: var(--primary-dark); */
+            padding-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+        }
+
+    
+
+        .faq-item {
+            margin-bottom: 16px;
+            border: 1px solid rgba(83, 12, 45, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-medium);
+            box-shadow: 0 5px 15px rgba(83, 12, 45, 0.08);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            background: var(--white);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question h3 {
+            color: var(--primary-dark);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            color: var(--primary-medium);
+            font-weight: bold;
+            transition: transform 0.4s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(144, 69, 103, 0.1);
+            border-radius: 50%;
+            line-height: 1;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            background: var(--primary-medium);
+            color: white;
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: rgba(83, 12, 45, 0.02);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 25px 25px;
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            color: var(--gray-medium);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* ---------- DARK MODE – only colours, fonts untouched ---------- */
+        [data-theme="dark"] body,
+        [data-theme="dark"] .contact-form-section,
+        [data-theme="dark"] .faq-section,
+        [data-theme="dark"] .map-section {
+            background: #121212;
+        }
+
+        [data-theme="dark"] .contact-form-section {
+            background: #1e1e1e;
+            border-color: rgba(144, 69, 103, 0.2);
+        }
+
+        [data-theme="dark"] .section-header h2,
+        [data-theme="dark"] .faq-header h2 {
+            color: var(--white);
+        }
+
+        [data-theme="dark"] .section-header p,
+        [data-theme="dark"] .faq-answer p {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .form-group label {
+            color: var(--white);
+        }
+
+        [data-theme="dark"] .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            /* color:var(--white) !important; */
+            border-color: var(--white);
+        }
+
+        [data-theme="dark"] .form-control:focus {
+            border-color: #d4a5c0;
+            box-shadow: 0 0 0 4px rgba(144, 69, 103, 0.2);
+        }
+
+        [data-theme="dark"] .faq-item {
+            background: #1e1e1e;
+            border-color: rgba(144, 69, 103, 0.2);
+        }
+
+        [data-theme="dark"] .faq-question {
+            background: #1e1e1e;
+        }
+
+        [data-theme="dark"] .faq-question h3 {
+            color: var(--white);
+        }
+
+        [data-theme="dark"] .faq-icon {
+            background: var(--white);
+            color: var(--primary-dark);
+        }
+
+        [data-theme="dark"] .faq-item.active .faq-icon {
+            background: var(--primary-medium);
+            color: white;
+        }
+
+        [data-theme="dark"] .faq-answer {
+            background: rgba(144, 69, 103, 0.05);
+        }
+
+        [data-theme="dark"] .google-map {
+            filter: brightness(0.9) contrast(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .success-popup {
+            background: #1e1e1e;
+            border-color: rgba(144, 69, 103, 0.3);
+        }
+
+        [data-theme="dark"] .popup-content h4 {
+            color: var(--primary-medium);
+        }
+
+        [data-theme="dark"] .popup-content p {
+            color: #e0e0e0;
+        }
+
+        /* ----- RESPONSIVE (only adjust sizes, never introduce new font-sizes) ----- */
+        @media (max-width: 768px) {
+            .contact-form-section {
+                padding: 40px 20px;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+
+            .faq-section .section-styles {
+                padding: 40px 0;
+            }
+
+            .faq-question {
+                padding: 18px 22px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-form-section {
+                padding: 30px 15px;
+            }
+
+            .map-container {
+                height: 300px;
+                padding: 0 15px;
+            }
+
+            .faq-question {
+                padding: 16px 20px;
+            }
+
+            .faq-icon {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .popup-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .popup-icon i {
+                font-size: 30px;
+            }
+
+            .faq-icon {
+                width: 26px;
+                height: 26px;
+            }
+
+            .map-container {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .map-container {
+                height: 220px;
+            }
+
+            .faq-container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="site-header" class="fixed-top"></div>
+    <div>
+
+        <!-- CONTACT FORM SECTION -->
+        <section class="section-styles contact-form-section-wrapper">
+            <div class="contact-form-section">
+                <div class="section-container">
+                    <div class="section-header">
+                        <h1>Get In Touch</h1>
+                        <p>Fill the form below and we'll respond within 24 hours</p>
+                    </div>
+
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <!-- Name - only letters, no spaces -->
+                        <div class="form-group">
+                            <label for="name">
+                                </i> Full Name <span class="required">*</span>
+                            </label>
+                            <input type="text" id="name" class="form-control"
+                                placeholder="Enter your full name (letters only)">
+                            <div class="error-message" id="nameError">
+                                <i class="bi bi-exclamation-circle"></i> Name must contain only letters and cannot be
+                                empty
+                            </div>
+                        </div>
+
+                        <!-- Email - only @gmail.com, no spaces -->
+                        <div class="form-group">
+                            <label for="email">
+                                </i> Email Address <span class="required">*</span>
+                            </label>
+                            <input type="email" id="email" class="form-control"
+                                placeholder="Enter your Gmail address (example@gmail.com)">
+                            <div class="error-message" id="emailError">
+                                <i class="bi bi-exclamation-circle"></i> Only @gmail.com allowed, no spaces
+                            </div>
+                        </div>
+
+                        <!-- Phone - 10 digits, start 6-9, no letters -->
+                        <div class="form-group">
+                            <label for="phone">
+                                </i> Phone Number <span class="required">*</span>
+                            </label>
+                            <input type="tel" id="phone" class="form-control" placeholder="10 digits, start with 6-9">
+                            <div class="error-message" id="phoneError">
+                                <i class="bi bi-exclamation-circle"></i> Phone must be 10 digits, start with 6-9, no
+                                spaces
+                            </div>
+                        </div>
+
+                        <!-- Subject mandatory -->
+                        <div class="form-group">
+                            <label for="subject">
+                                </i> Subject <span class="required">*</span>
+                            </label>
+                            <select id="subject" class="form-control">
+                                <option value=""></option>
+                                <option value="property-inquiry">Property Inquiry</option>
+                                <option value="investment-advice">Investment Advice</option>
+                                <option value="property-valuation">Property Valuation</option>
+                                <option value="general-question">General Question</option>
+                            </select>
+                            <div class="error-message" id="subjectError">
+                                <i class="bi bi-exclamation-circle"></i> Please select a subject
+                            </div>
+                        </div>
+
+                        <!-- Message min 10 chars -->
+                        <div class="form-group">
+                            <label for="message">
+                                </i> Message <span class="required">*</span>
+                            </label>
+                            <textarea id="message" class="form-control"
+                                placeholder="Type your message here..."></textarea>
+                            <div class="error-message" id="messageError">
+                                <i class="bi bi-exclamation-circle"></i> Message must be at least 10 characters
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="bi bi-send"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Success popup -->
+                <div class="success-popup" id="successPopup">
+                    <div class="popup-content">
+                        <div class="popup-icon">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+                        <h4>Success!</h4>
+                        <p>Your message has been sent successfully.</p>
+                        <p class="popup-small">We'll get back to you within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMPLE GOOGLE MAP SECTION -->
+        <section class="section-styles map-section">
+            <div class="map-container">
+                <iframe class="google-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.3059669865!2d-74.25986632369253!3d40.69714941648234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1645543214567!5m2!1sen!2sin"
+                    allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION with dropdown icons -->
+        <section class="section-styles faq-section">
+            <div class="faq-container">
+                <div class="faq-header">
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I schedule a property viewing?</h3>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can schedule a property viewing by filling out our contact form or calling us directly.
+                            Our team will confirm your appointment within 24 hours.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What documents are needed for purchase?</h3>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You'll need valid ID, proof of income, bank statements, and pre-approval letter from your
+                            lender.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer virtual tours?</h3>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer 360° virtual tours and live video walkthroughs for most properties.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What are your office hours?</h3>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Monday-Friday: 9am-6pm | Saturday: 10am-4pm | Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="side-footer"></div>
+
+    <script src="footer.js"></script>
+    <script src="header.js"></script>
+
+    <!-- Bootstrap JS MUST come before custom navbar script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        (function () {
+            'use strict';
+
+            // ----- THEME (dark/light) with localStorage -----
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+
+            // theme toggle (if element exists)
+            const themeToggle = document.querySelector('[data-theme-toggle]');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    const current = document.documentElement.getAttribute('data-theme') || 'light';
+                    const next = current === 'light' ? 'dark' : 'light';
+                    document.documentElement.setAttribute('data-theme', next);
+                    localStorage.setItem('theme', next);
+                });
+            }
+
+            // ----- CONTACT FORM VALIDATION (no comments, strict rules) -----
+            const contactForm = document.getElementById('contactForm');
+            if (!contactForm) return;
+
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const subjectSelect = document.getElementById('subject');
+            const messageInput = document.getElementById('message');
+            const submitBtn = document.getElementById('submitBtn');
+            const successPopup = document.getElementById('successPopup');
+
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const phoneError = document.getElementById('phoneError');
+            const subjectError = document.getElementById('subjectError');
+            const messageError = document.getElementById('messageError');
+
+            function validateName() {
+                const val = nameInput.value;
+                if (val === '') {
+                    setInvalid(nameInput, nameError, 'Name cannot be empty');
+                    return false;
+                }
+                if (/\s/.test(val)) {
+                    setInvalid(nameInput, nameError, 'Name cannot contain spaces');
+                    return false;
+                }
+                if (/\d/.test(val)) {
+                    setInvalid(nameInput, nameError, 'Name cannot contain numbers');
+                    return false;
+                }
+                if (!/^[A-Za-z]+$/.test(val)) {
+                    setInvalid(nameInput, nameError, 'Only letters A-Z allowed');
+                    return false;
+                }
+                setValid(nameInput, nameError);
+                return true;
+            }
+
+            function validateEmail() {
+                const val = emailInput.value.trim();
+                const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|net)$/i;
+                if (val === '') {
+                    setInvalid(emailInput, emailError, 'Email cannot be empty');
+                    return false;
+                }
+                if (/\s/.test(val)) {
+                    setInvalid(emailInput, emailError, 'Email cannot contain spaces');
+                    return false;
+                }
+                if (!regex.test(val)) {
+                    setInvalid(emailInput, emailError, 'Only @gmail.com allowed');
+                    return false;
+                }
+                setValid(emailInput, emailError);
+                return true;
+            }
+
+            function validatePhone() {
+                let val = phoneInput.value.trim();
+                val = val.replace(/\s/g, '');
+                phoneInput.value = val;
+
+                if (val === '') {
+                    setInvalid(phoneInput, phoneError, 'Phone cannot be empty');
+                    return false;
+                }
+                if (!/^[0-9]+$/.test(val)) {
+                    setInvalid(phoneInput, phoneError, 'Only digits allowed');
+                    return false;
+                }
+                if (val.length !== 10) {
+                    setInvalid(phoneInput, phoneError, 'Exactly 10 digits required');
+                    return false;
+                }
+                if (val.charAt(0) < '6' || val.charAt(0) > '9') {
+                    setInvalid(phoneInput, phoneError, 'First digit must be 6,7,8,9');
+                    return false;
+                }
+                setValid(phoneInput, phoneError);
+                return true;
+            }
+
+            function validateSubject() {
+                if (subjectSelect.value === '') {
+                    subjectSelect.classList.add('error');
+                    subjectSelect.classList.remove('success');
+                    subjectError.classList.add('show');
+                    return false;
+                }
+                subjectSelect.classList.remove('error');
+                subjectSelect.classList.add('success');
+                subjectError.classList.remove('show');
+                return true;
+            }
+
+            function validateMessage() {
+                const val = messageInput.value.trim();
+                if (val === '') {
+                    setInvalid(messageInput, messageError, 'Message cannot be empty');
+                    return false;
+                }
+                if (val.length < 10) {
+                    setInvalid(messageInput, messageError, 'Minimum 10 characters');
+                    return false;
+                }
+                setValid(messageInput, messageError);
+                return true;
+            }
+
+            function setInvalid(field, errorEl, msg) {
+                field.classList.add('error');
+                field.classList.remove('success');
+                errorEl.innerHTML = '<i class="bi bi-exclamation-circle"></i> ' + msg;
+                errorEl.classList.add('show');
+            }
+
+            function setValid(field, errorEl) {
+                field.classList.remove('error');
+                field.classList.add('success');
+                errorEl.classList.remove('show');
+            }
+
+            // Input restrictions
+            nameInput.addEventListener('keypress', function (e) {
+                const char = String.fromCharCode(e.keyCode);
+                if (!/^[A-Za-z]$/.test(char)) e.preventDefault();
+            });
+            nameInput.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text').replace(/[^A-Za-z]/g, '');
+                nameInput.value = text;
+            });
+
+            phoneInput.addEventListener('keypress', function (e) {
+                const char = String.fromCharCode(e.keyCode);
+                if (!/^[0-9]$/.test(char)) {
+                    e.preventDefault();
+                    return;
+                }
+                if (phoneInput.value.length === 0) {
+                    if (char !== '6' && char !== '7' && char !== '8' && char !== '9') {
+                        e.preventDefault();
+                        phoneError.innerHTML = '<i class="bi bi-exclamation-circle"></i> First digit must be 6-9';
+                        phoneError.classList.add('show');
+                        phoneInput.classList.add('error');
+                    }
+                }
+            });
+            phoneInput.addEventListener('input', function () {
+                let val = phoneInput.value.replace(/[^0-9]/g, '');
+                if (val.length > 10) val = val.slice(0, 10);
+                phoneInput.value = val;
+                if (val.length > 0 && (val[0] < '6' || val[0] > '9')) {
+                    phoneInput.classList.add('error');
+                    phoneError.classList.add('show');
+                }
+            });
+            phoneInput.addEventListener('paste', function (e) {
+                e.preventDefault();
+                let paste = e.clipboardData.getData('text').replace(/[^0-9]/g, '');
+                if (paste.length > 10) paste = paste.slice(0, 10);
+                if (paste.length > 0 && (paste[0] < '6' || paste[0] > '9')) {
+                    phoneError.innerHTML = '<i class="bi bi-exclamation-circle"></i> Must start with 6-9';
+                    phoneError.classList.add('show');
+                    phoneInput.classList.add('error');
+                    phoneInput.value = '';
+                } else {
+                    phoneInput.value = paste;
+                }
+            });
+
+            emailInput.addEventListener('keypress', function (e) {
+                if (e.key === ' ') e.preventDefault();
+            });
+
+            // real-time validation
+            nameInput.addEventListener('input', validateName);
+            emailInput.addEventListener('input', validateEmail);
+            phoneInput.addEventListener('input', validatePhone);
+            subjectSelect.addEventListener('change', validateSubject);
+            messageInput.addEventListener('input', validateMessage);
+            nameInput.addEventListener('blur', validateName);
+            emailInput.addEventListener('blur', validateEmail);
+            phoneInput.addEventListener('blur', validatePhone);
+            messageInput.addEventListener('blur', validateMessage);
+
+            // submit
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const validName = validateName();
+                const validEmail = validateEmail();
+                const validPhone = validatePhone();
+                const validSubject = validateSubject();
+                const validMessage = validateMessage();
+
+                if (validName && validEmail && validPhone && validSubject && validMessage) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> Sending...';
+                    setTimeout(() => {
+                        successPopup.classList.add('show');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="bi bi-send"></i> Send Message';
+                        setTimeout(() => successPopup.classList.remove('show'), 2000);
+                        contactForm.reset();
+                        document.querySelectorAll('.form-control').forEach(f => {
+                            f.classList.remove('success', 'error');
+                        });
+                    }, 1500);
+                } else {
+                    const firstErr = document.querySelector('.form-control.error');
+                    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+
+            document.addEventListener('click', function (e) {
+                if (successPopup.classList.contains('show') &&
+                    !successPopup.contains(e.target) && e.target !== submitBtn) {
+                    successPopup.classList.remove('show');
+                }
+            });
+
+            // ----- FAQ ACCORDION (simple toggle) -----
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function () {
+                    const faqItem = this.parentElement;
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        if (item !== faqItem && item.classList.contains('active')) {
+                            item.classList.remove('active');
+                        }
+                    });
+                    faqItem.classList.toggle('active');
+                });
+            });
+
+            // clear initial errors
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+        })();
+    </script>
+
+
+</body>
+
+</html>

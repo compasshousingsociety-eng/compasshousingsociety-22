@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate</title>
+
+    <link rel="stylesheet" href="globalstyles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #530C2D;
+            --secondary: #904567;
+            --white: #ffffff;
+            --black: #000000;
+        }
+
+        body {
+            font-family: "JetBrains Mono", "Cascadia Code", monospace;
+            background: var(--white);
+            color: var(--black);
+        }
+
+        html[data-theme="dark"] body {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        section {
+            /* padding: 40px; */
+            position: relative;
+            overflow: hidden;
+        }
+
+
+
+        .blog-hero {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .blog-hero-inner {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .section-styles {
+            padding: 40px;
+            margin-bottom: -30px;
+        }
+
+
+        h1 {
+            font-size: 42px;
+            color: var(--black);
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        h3 {
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        h4 {
+            font-size: 21px;
+        }
+
+        h5,
+        h6 {
+            font-size: 19px;
+        }
+
+        p,
+        span {
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        a,
+        li {
+            font-size: 16px;
+        }
+
+
+        /* TEAM SECTION */
+        .team-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .mini-title {
+            font-size: 16px;
+            color: var(--secondary);
+        }
+
+        .testimonial-card h3 {
+            color: var(--primary);
+        }
+
+        html[data-theme="dark"] .testimonial-card h3 {
+            color: var(--white);
+        }
+
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("images/transparent-logo-1.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 600px auto;
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        :root[data-theme="dark"] body::before {
+            opacity: 0.10;
+        }
+
+        .profile-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .stars {
+            font-size: 16px;
+            color: var(--secondary);
+        }
+
+        .role {
+            font-size: 16px;
+            color: var(--secondary);
+        }
+
+        .team-images img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        /* APPLY SECTION */
+        .apply-section {
+            text-align: center;
+        }
+
+      
+
+        .apply-steps {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .apply-step {
+            max-width: 260px;
+            text-align: center;
+            /* CENTER CONTENT */
+        }
+
+        .step-number {
+            font-size: 32px;
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+
+        /* CTA */
+        .cta-banner {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            width: 97%;
+            margin: 20px;
+        }
+
+        .cta-btn {
+            background: var(--white);
+            color: var(--primary);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        /* DARK MODE TEXT FIXES */
+        html[data-theme="dark"] h1,
+        html[data-theme="dark"] .apply-title {
+            color: var(--secondary);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .team-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .apply-step {
+                text-align: center;
+            }
+
+            .blog-hero-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .blog-hero-line {
+                display: none;
+            }
+        }
+
+        :root[data-theme="dark"] .cta-banner {
+            background-color: var(--black);
+            border: 1px solid var(--white);
+            width: 97%;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="site-header" class="fixed-top"></div>
+
+    <div>
+        <section class="blog-hero section-styles">
+            <div class="blog-hero-inner">
+                <!-- <div class="blog-hero-line"></div> -->
+                <div class="blog-hero-text">
+                    <h1>Blog</h1>
+                    <p>
+                        Aliquet nec mauris tortor at sed ut. Faucibus habitant risus morbi quis
+                        egestas etiam lorem. Eget lorem ipsum eget mattis cursus.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-speaks section-styles">
+            <div class="team-container" style="padding:40px;">
+                <div class="team-text">
+                    <h2>Discover What Our Team Says</h2>
+
+                    <div class="testimonial-card">
+                        <div class="profile-row">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ3tNtqxEk4YjqTPH5gYaQ2ZYqYl0sMNKePg&s"
+                                alt="Profile" class="avatar">
+                            <div>
+                                <span class="stars">★★★★★</span>
+                                <h4>Angelo Jones</h4>
+                                <span class="role">Software Engineer</span>
+                            </div>
+                        </div>
+
+                        <h3>Collaborative Environment</h3>
+                        <p>
+                            Convalis at ornare eros euismod id porttitor quis. Quam ipsum tincidunt nec mauris
+                            vestibulum at pellentesque dignissim.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-images">
+                    <img src="https://thumbs.dreamstime.com/b/team-architect-engineer-businessman-having-meeting-new-property-real-estate-development-project-over-design-safety-394794071.jpg"
+                        alt="Team">
+                </div>
+            </div>
+        </section>
+
+        <section class="apply-section section-styles">
+            <h2 class="apply-title">Here's How to Apply at Sunny</h2>
+
+            <div class="apply-steps">
+                <div class="apply-step">
+                    <div class="step-number">01</div>
+                    <h3>Find Your Role</h3>
+                    <p>Augue et mauris tortor at sed. Ut aliquet habitant risus mattis non egestas varius.</p>
+                </div>
+
+                <div class="apply-step">
+                    <div class="step-number">02</div>
+                    <h3>Prepare Documents</h3>
+                    <p>Augue et mauris tortor at sed. Ut aliquet habitant risus mattis non egestas varius.</p>
+                </div>
+
+                <div class="apply-step">
+                    <div class="step-number">03</div>
+                    <h3>Submit Application</h3>
+                    <p>Augue et mauris tortor at sed. Ut aliquet habitant risus mattis non egestas varius.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-banner section-styles">
+            <h2>Join Our Dream Team!</h2>
+            <p>
+                Build your future with us. Work alongside passionate professionals,
+                contribute to exciting real estate projects, and grow your career
+                in a collaborative, innovation-driven environment.
+            </p>
+
+            <p>
+                Whether you're a designer, engineer, marketer, or strategist,
+                Sunny offers opportunities that challenge and inspire.
+            </p>
+
+            <a href="contact.html">
+                <button class="cta-btn">Join Our Team</button>
+            </a>
+        </section>
+
+    </div>
+
+     <div id="side-footer"></div>
+
+    <script src="footer.js"></script>
+    <script src="header.js"></script>
+
+    <!-- Bootstrap JS MUST come before custom navbar script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

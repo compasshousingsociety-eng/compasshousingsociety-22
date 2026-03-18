@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate</title>
+
+    <link rel="stylesheet" href="globalstyles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+
+    /* ===== ROOT COLOR SYSTEM (AS REQUESTED) ===== */
+    :root {
+        --primary-color: #530C2D;
+        --secondary-color: #904567;
+        --light-bg: #ffffff;
+        --dark-bg: #000000;
+        --text-light: #ffffff;
+        --text-dark: #000000;
+    }
+
+    /* ===== STRICT FONT RULES (NEVER CHANGE) ===== */
+    h1 { font-size: 42px; }
+    h2 { font-size: 32px; }
+    h3 { font-size: 22px; }
+    h4 { font-size: 21px; }
+    h5, h6 { font-size: 19px; }
+    p, span { font-size: 17px; }
+    li, a, button, .btn { font-size: 16px; }
+
+    body {
+        font-family: "JetBrains Mono", "Cascadia Code", monospace;
+        background-color: var(--light-bg);
+        color: var(--text-dark);
+    }
+
+    /* ===== WATERMARK ===== */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("images/transparent-logo-1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 600px auto;
+        opacity: 0.10;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+ 
+    /* ===== HERO SECTION ===== */
+    .services-hero {
+        padding: 40px 0 0;
+        text-align: center;
+    }
+
+    .services-hero h1 {
+        color: var(--text-dark);
+        font-weight: 700;
+        letter-spacing: 2px;
+        /* text-transform: uppercase; */
+    }
+
+    .services-hero p {
+        color: var(--text-dark);
+        max-width: 720px;
+        margin: 10px auto;
+        line-height: 1.6;
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+        color: var(--text-dark);
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+    }
+
+ 
+
+    /* ===== ROW GAP BETWEEN ROWS ===== */
+    .services-grid .row {
+        row-gap: 30px;
+    }
+
+    /* ===== CARD ===== */
+    .service-card-icon {
+        background: var(--light-bg);
+        border-radius: 12px;
+        padding: 40px 35px;
+        border: 1px solid var(--primary-color);
+        text-align: center;
+        height: 100%;
+        transition: 0.3s ease;
+    }
+
+    .service-card-icon:hover {
+        border-color: var(--secondary-color);
+        transform: translateY(-6px);
+    }
+
+    /* ===== ICONS ===== */
+    .icon-circle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        transition: 0.3s ease;
+    }
+
+    .service-card-icon:hover .icon-circle {
+        background: var(--secondary-color);
+    }
+
+    .service-icon {
+        font-size: 32px;
+        color: var(--text-light);
+    }
+
+    .service-card-icon h3 {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .service-card-icon p {
+        color: var(--text-dark);
+        line-height: 1.6;
+    }
+
+    /* ===== DARK MODE SYSTEM ===== */
+    [data-theme="dark"] body {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+    }
+
+    [data-theme="dark"] .services-hero h1,
+    [data-theme="dark"] .section-header h2,
+    [data-theme="dark"] .service-card-icon h3 {
+        color: var(--text-light);
+    }
+
+    [data-theme="dark"] .services-hero p,
+    [data-theme="dark"] .service-card-icon p {
+        color: var(--text-light);
+    }
+
+    [data-theme="dark"] .service-card-icon {
+        background: var(--dark-bg);
+        border-color: var(--secondary-color);
+    }
+
+    /* ===== RESPONSIVENESS (LAYOUT ONLY) ===== */
+
+    @media (max-width: 992px) {
+        .services-hero { padding-top: 90px; }
+        .service-card-icon { padding: 30px 20px; }
+        .icon-circle { width: 60px; height: 60px; }
+    }
+
+    @media (max-width: 576px) {
+        .services-hero { padding-top: 70px; }
+        .icon-circle { width: 55px; height: 55px; }
+        .service-icon { font-size: 26px; }
+    }
+.section-styles{
+    padding: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="site-header" class="fixed-top"></div>
+
+<section class="services-hero section-styles">
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Comprehensive real estate solutions tailored to your needs</p>
+        <p>
+            With two decades of unparalleled expertise in premium real estate, we offer bespoke solutions
+            that transcend traditional brokerage while delivering exceptional client experiences.
+        </p>
+    </div>
+</section>
+
+<section class="services-grid section-styles">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Range of Services</h2>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-icon">
+                    <div class="icon-circle"><i class="bi bi-book service-icon"></i></div>
+                    <h3>Knowledge Base</h3>
+                    <p>Professional guidance and expert insights for confident property decisions.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-icon">
+                    <div class="icon-circle"><i class="bi bi-credit-card service-icon"></i></div>
+                    <h3>Billing & Payments</h3>
+                    <p>Transparent transactions and seamless payment processing for every deal.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-icon">
+                    <div class="icon-circle"><i class="bi bi-shield-lock service-icon"></i></div>
+                    <h3>Data Privacy</h3>
+                    <p>Your personal and financial information remains protected and secure.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-icon">
+                    <div class="icon-circle"><i class="bi bi-person-gear service-icon"></i></div>
+                    <h3>Account Management</h3>
+                    <p>Dedicated assistance for managing preferences, assets, and investments.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-icon">
+                    <div class="icon-circle"><i class="bi bi-tools service-icon"></i></div>
+                    <h3>Troubleshooting</h3>
+                    <p>Rapid resolution of issues ensuring uninterrupted client experiences.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-icon">
+                    <div class="icon-circle"><i class="bi bi-chat-dots service-icon"></i></div>
+                    <h3>Live Chat Support</h3>
+                    <p>Instant communication with specialists for real-time assistance.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div id="side-footer"></div>
+
+<!-- ✅ REQUIRED FOR MENUBAR -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="footer.js"></script>
+<script src="header.js"></script>
+
+</body>
+</html>

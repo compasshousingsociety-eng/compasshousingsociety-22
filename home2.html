@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate</title>
+
+    <link rel="stylesheet" href="globalstyles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+   ROOT COLORS (ONLY ALLOWED)
+========================================================= */
+        :root {
+            --primary: #530C2D;
+            --secondary: #904567;
+            --white: #ffffff;
+            --black: #000000;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-main: var(--black);
+            --text-main: var(--white);
+        }
+
+        :root[data-theme="light"] {
+            --bg-main: var(--white);
+            --text-main: var(--black);
+        }
+
+        /* =========================================================
+   GLOBAL RESET & TYPOGRAPHY SYSTEM (LOCKED)
+========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "JetBrains Mono", "Cascadia Code";
+            background: var(--bg-main);
+            color: var(--text-main);
+            padding-top: 80px;
+        }
+
+        h1 {
+            font-size: 42px;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        h3 {
+            font-size: 22px;
+        }
+
+        h4 {
+            font-size: 21px;
+        }
+
+        h5,
+        h6 {
+            font-size: 19px;
+        }
+
+        p,
+        span {
+            font-size: 17px;
+        }
+
+        a,
+        li,
+        input,
+        button {
+            font-size: 16px;
+        }
+
+        /* =========================================================
+   SECTION SPACING SYSTEM
+========================================================= */
+        .home2-section {
+            padding: 40px 0;
+        }
+
+        .home2-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* =========================================================
+   HERO SECTION
+========================================================= */
+        .home2-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .home2-hero-img img {
+            width: 100%;
+            border-radius: 16px;
+        }
+
+        /* =========================================================
+   STATS SECTION
+========================================================= */
+        .home2-stats {
+            text-align: center;
+        }
+
+        .home2-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .home2-stat-card {
+            background: var(--primary);
+            color: var(--white);
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        .home2-stat-card:hover {
+            background: var(--secondary);
+        }
+
+        /* =========================================================
+   CORE EXPERTISE
+========================================================= */
+        .home2-wrapper {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .home2-item {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .home2-number {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .home2-right img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 18px;
+        }
+
+        /* =========================================================
+   FEATURED PROPERTIES
+========================================================= */
+        .home2-image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .home2-image-grid img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+
+        .newsletter-box {
+            max-width: 640px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .newsletter-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .newsletter-icon i {
+            color: var(--white);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+        }
+
+        .newsletter-form button {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+        }
+
+        /* =========================================================
+   WATERMARK LOGO SUPPORT
+========================================================= */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: url("images/logo-watermark.png") center/300px no-repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        /* =========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================= */
+        @media (max-width: 992px) {
+
+            .home2-hero,
+            .home2-wrapper {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+
+            .home2-image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .home2-stats-grid,
+            .home2-image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+          body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("images/transparent-logo-1.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 600px auto;
+      opacity: 0.10;
+      pointer-events: none;
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    :root[data-theme="dark"] body::before {
+      opacity: 0.10;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div id="site-header" class="fixed-top"></div>
+
+
+    <!-- SECTION 1 -->
+    <div class="home2-section">
+        <div class="home2-container home2-hero">
+            <div>
+                <h1>Find a dream property that changes life.</h1>
+                <p>Explore premium real-estate opportunities built for long-term growth.</p>
+                <p>
+                    Explore premium real-estate opportunities built for long-term growth through carefully planned
+                    developments, market-driven insights, and value-focused investments. Our properties are designed
+                    to deliver stability, appreciation, and lasting returns by combining strategic locations,
+                    quality construction, and future-ready infrastructure—empowering buyers and investors to make
+                    confident, sustainable real-estate decisions.
+                </p>
+
+
+            </div>
+            <div class="home2-hero-img">
+                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994">
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="home2-section home2-stats">
+        <div class="home2-container">
+            <h2>Big companies are here</h2>
+            <p>Trusted by industry leaders worldwide.</p>
+
+            <div class="home2-stats-grid">
+                <div class="home2-stat-card">
+                    <h3>90%</h3>
+                    <p>Growth ↑</p>
+                </div>
+                <div class="home2-stat-card">
+                    <h3>75%</h3>
+                    <p>ROI ↑</p>
+                </div>
+                <div class="home2-stat-card">
+                    <h3>85%</h3>
+                    <p>Success ↑</p>
+                </div>
+                <div class="home2-stat-card">
+                    <h3>60%</h3>
+                    <p>Expansion ↑</p>
+                </div>
+                <div class="home2-stat-card">
+                    <h3>95%</h3>
+                    <p>Trust ↑</p>
+                </div>
+                <div class="home2-stat-card">
+                    <h3>70%</h3>
+                    <p>Retention ↑</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="home2-section">
+        <div class="home2-container">
+            <h2 class="mb-5">Our Core Real-Estate Expertise</h2>
+
+            <div class="home2-wrapper">
+                <div class="home2-left">
+                    <div class="home2-item">
+                        <span class="home2-number">1</span>
+                        <div>
+                            <h3>Strategic Property Planning</h3>
+                            <p>Market-backed insights for confident decisions.</p>
+                        </div>
+                    </div>
+
+                    <div class="home2-item">
+                        <span class="home2-number">2</span>
+                        <div>
+                            <h3>Investment Advisory</h3>
+                            <p>Smart strategies designed for growth.</p>
+                        </div>
+                    </div>
+
+                    <div class="home2-item">
+                        <span class="home2-number">3</span>
+                        <div>
+                            <h3>Property Management</h3>
+                            <p>End-to-end care ensuring steady income.</p>
+                        </div>
+                    </div>
+                      <div class="home2-item">
+                        <span class="home2-number">4</span>
+                        <div>
+                            <h3>Investment Advisory</h3>
+                            <p>Smart strategies designed for growth.</p>
+                        </div>
+                    </div>
+                  
+
+                </div>
+
+                <div class="home2-right">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="home2-section">
+        <div class="home2-container">
+            <h2 class="text-center mb-4">Featured Properties</h2>
+
+            <div class="home2-image-grid">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994">
+                    <p><strong>Luxury Villa</strong></p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be">
+                    <p><strong>Modern Home</strong></p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+                    <p><strong>Urban Apartment</strong></p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6">
+                    <p><strong>Smart Living</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL SECTION (EXACT STYLE LIKE IMAGE) -->
+    <div class="home2-section newsletter-section">
+        <div class="newsletter-box">
+
+            <div class="newsletter-icon">
+                <i class="bi bi-envelope"></i>
+            </div>
+
+            <h2>Get our latest updates</h2>
+            <p>
+                With lots of unique blocks, you can easily build a page without coding.
+                Build your next landing page.
+            </p>
+
+            <form class="newsletter-form" onsubmit="return subscribeValidate()">
+                <input type="email" id="subEmail" placeholder="Enter your email" onkeydown="return event.key !== ' '">
+
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="side-footer"></div>
+    <script src="footer.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="header.js"></script>
+
+    <script>
+        function subscribeValidate() {
+            const emailInput = document.getElementById("subEmail");
+            const rawValue = emailInput.value;
+
+            if (rawValue.trim() === "") {
+                alert("❌ Email cannot be empty");
+                return false;
+            }
+
+            if (/\s/.test(rawValue)) {
+                alert("❌ Spaces are not allowed in email");
+                return false;
+            }
+
+            const emailPattern =/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|net)$/;
+
+            if (!emailPattern.test(rawValue)) {
+                alert("❌ Please enter a valid @gmail.com email");
+                return false;
+            }
+
+            alert("✅ Subscription successful!");
+            emailInput.value = "";
+            return false;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Real Estate | Premium Properties</title>
+
+    <link rel="stylesheet" href="globalstyles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #530C2D;
+            --secondary: #904567;
+            --white: #ffffff;
+            --black: #000000;
+            --light-gray: #f8f9fa;
+            --dark-bg: #121212;
+            --dark-card: #1a1a1a;
+            --dark-text: #ffffff;
+
+            --bg-main: #ffffff;
+            --text-main: #000000;
+            --re-bg: #ffffff;
+            --re-text: #000000;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-main: #000000;
+            --text-main: #ffffff;
+            --re-bg: #121212;
+            --re-text: #ffffff;
+        }
+
+        body {
+            font-family: "JetBrains Mono", "Cascadia Code", monospace;
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: var(--bg-main);
+            position: relative;
+            min-height: 100vh;
+        }
+
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("images/transparent-logo-1.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 600px auto;
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        :root[data-theme="dark"] body::before {
+            opacity: 0.10;
+        }
+
+        h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 32px;
+            line-height: 1.3;
+            font-weight: 600;
+            /* color: var(--text-main); */
+        }
+
+        h3 {
+            font-size: 22px;
+            line-height: 1.4;
+            font-weight: 600;
+            /* color: var(--text-main); */
+        }
+
+        h4 {
+            font-size: 21px;
+            line-height: 1.4;
+            font-weight: 600;
+            /* color: var(--text-main); */
+        }
+
+        h5,
+        h6 {
+            font-size: 19px;
+            line-height: 1.5;
+            font-weight: 600;
+            /* color: var(--text-main); */
+        }
+
+        p,
+        span {
+            font-size: 17px;
+            line-height: 1.6;
+            /* color: var(--text-main); */
+        }
+
+        a,
+        li,
+        button,
+        label,
+        input,
+        textarea,
+        select {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        * {
+            font-size: inherit;
+        }
+
+        section {
+            position: relative;
+            margin-bottom: 40px;
+            /* padding-top: 40px; */
+            background-color: transparent;
+        }
+
+        section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-container {
+            padding: 0 15px;
+        }
+
+
+
+        .box {
+            background: var(--primary);
+            color: var(--white);
+            padding: 28px 24px;
+            border-radius: 16px;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        :root[data-theme="dark"] .box {
+            background: var(--dark-card);
+            color: var(--dark-text);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .img-main {
+            filter: brightness(1);
+            transition: filter 0.3s ease;
+        }
+
+        :root[data-theme="dark"] .img-main {
+            filter: brightness(0.8);
+        }
+
+        .property-card {
+            background: var(--white);
+            color: var(--black);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        :root[data-theme="dark"] .property-card {
+            background: var(--dark-card);
+            color: var(--dark-text);
+        }
+
+        .property-info {
+            color: var(--black);
+            padding: 20px;
+        }
+
+        :root[data-theme="dark"] .property-info {
+            color: var(--dark-text);
+        }
+
+        .property-price {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        :root[data-theme="dark"] .property-price {
+            color: #ff6b9d;
+        }
+
+        .property-features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        :root[data-theme="dark"] .property-features {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .team-card h5 {
+            color: var(--text-main);
+        }
+
+        :root[data-theme="dark"] .team-card h5 {
+            color: var(--dark-text);
+        }
+
+        .team-card span {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        :root[data-theme="dark"] .team-card span {
+            color: #ff9ec0;
+        }
+
+        .team-card p {
+            color: var(--text-main);
+        }
+
+        :root[data-theme="dark"] .team-card p {
+            color: #cccccc;
+        }
+
+        .testimonial-card {
+            background: var(--light-gray);
+            color: var(--black);
+            border-radius: 16px;
+            padding: 28px;
+            height: 100%;
+            position: relative;
+        }
+
+        :root[data-theme="dark"] .testimonial-card {
+            background: var(--dark-card);
+            color: var(--dark-text);
+        }
+
+        .contact-form .form-control {
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        :root[data-theme="dark"] .contact-form .form-control {
+            background: var(--dark-card);
+            color: var(--dark-text);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        :root[data-theme="dark"] .contact-form .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(83, 12, 45, 0.3);
+        }
+
+        :root[data-theme="dark"] .contact-form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        :root[data-theme="dark"] .text-secondary {
+            color: #cccccc !important;
+        }
+
+        .btn-main {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        :root[data-theme="dark"] .btn-main {
+            background: var(--primary);
+            color: var(--dark-text);
+        }
+
+        .btn-secondary {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        :root[data-theme="dark"] .btn-secondary {
+            background: var(--primary);
+            color: var(--dark-text);
+        }
+
+        .img-main {
+            width: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .img-main:hover {
+            transform: scale(1.02);
+        }
+
+        .image-wrap {
+            position: relative;
+        }
+
+        .image-wrap .overlap-img {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 160px;
+            border: 4px solid var(--white);
+            border-radius: 14px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        :root[data-theme="dark"] .image-wrap .overlap-img {
+            border: 4px solid var(--dark-card);
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .box i {
+            font-size: 32px;
+            color: var(--white);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .team-card {
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .team-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 16px;
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .image-wrap .overlap-img {
+                width: 140px;
+                left: -10px;
+            }
+
+            .property-img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            h4 {
+                font-size: 19px;
+            }
+
+            .image-wrap .overlap-img {
+                width: 120px;
+                left: 10px;
+                bottom: -15px;
+            }
+
+            .box {
+                padding: 20px;
+            }
+
+            .background-logo {
+                background-size: 400px auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            h3 {
+                font-size: 19px;
+            }
+
+            .image-wrap .overlap-img {
+                width: 100px;
+                left: 15px;
+                bottom: -10px;
+            }
+
+            .btn-main,
+            .btn-secondary {
+                padding: 10px 22px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .team-card img {
+                height: 220px;
+            }
+
+            .background-logo {
+                background-size: 300px auto;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .image-wrap .overlap-img {
+                width: 90px;
+                left: 10px;
+            }
+        }
+
+        .dreamhome-styles {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 30px;
+        }
+
+        :root[data-theme="dark"] .dreamhome-styles {
+            /* border: 2px solid var(--white); */
+            background-color: black;
+        }
+
+        .section-styles {
+            padding: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Logo -->
+    <div class="background-logo"></div>
+
+    <div id="site-header" class="fixed-top"></div>
+
+    <section class="section-styles">
+        <div class="section-watermark"></div>
+        <div class="container text-center">
+            <h1>Modern Real Estate Solutions</h1>
+            <h3>Designing future-ready homes that balance innovation, comfort, and value.</h3>
+            <p>Discover properties that combine cutting-edge design with timeless appeal for the modern homeowner.</p>
+           <a href="services2.html"> <button class="btn-main mt-3">Explore Properties</button></a>
+        </div>
+    </section>
+
+    <section class="section-styles">
+        <div class="section-watermark"></div>
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="image-wrap">
+                        <img class="img-main" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+                            alt="Modern architecture">
+                        <img class="overlap-img" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994"
+                            alt="Interior design">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Building Better Living Spaces</h2>
+                    <h4>Thoughtfully designed homes for modern lifestyles.</h4>
+                    <p>Our approach combines sustainable materials, smart layouts, and timeless design principles to
+                        create homes that are both beautiful and functional Every property is crafted with attention to
+                        detail.</p>
+                   <a href="blogdetails.html">
+                     <button class="btn-secondary mt-3">Learn More</button>
+                   </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-styles">
+        <div class="container text-center">
+            <h2>Why Choose Us</h2>
+            <h5 class="mb-4">Our commitment to excellence in every project</h5>
+            <div class="row g-4 mt-3">
+                <div class="col-md-4">
+                    <div class="box">
+                        <i class="bi bi-house-heart"></i>
+                        <h3>Customer First</h3>
+                        <p>Transparent, trust-driven relationships with our clients are at the core of everything we do.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <i class="bi bi-building-check"></i>
+                        <h3>Quality Assured</h3>
+                        <p>Adherence to strict construction standards and premium materials in every project.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <i class="bi bi-geo-alt"></i>
+                        <h3>Prime Locations</h3>
+                        <p>Properties strategically positioned for excellent city connectivity and future growth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-styles">
+        <div class="container">
+            <h2 class="text-center">Featured Properties</h2>
+            <h5 class="text-center mb-4">Handpicked selections of premium real estate</h5>
+
+            <div class="row g-4 mt-3">
+                <div class="col-md-6 col-lg-4">
+                    <div class="property-card">
+                        <img class="property-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9"
+                            alt="Modern villa">
+                        <div class="property-info">
+                            <h5>Urban Oasis Villa</h5>
+                            <p class="property-price">$850,000</p>
+                            <p>3 Beds | 2 Baths | 2,200 sqft</p>
+                         
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="property-card">
+                        <img class="property-img" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3"
+                            alt="Luxury apartment">
+                        <div class="property-info">
+                            <h5>Skyline Penthouse</h5>
+                            <p class="property-price">$1,200,000</p>
+                            <p>4 Beds | 3 Baths | 3,000 sqft</p>
+                          
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="property-card">
+                        <img class="property-img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
+                            alt="Suburban home">
+                        <div class="property-info">
+                            <h5>Suburban Family Home</h5>
+                            <p class="property-price">$650,000</p>
+                            <p>4 Beds | 3 Baths | 2,800 sqft</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dreamhome-styles" class="section-styles">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <img class="img-main" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+                        alt="Dream home">
+                </div>
+                <div class="col-lg-6">
+                    <h2>Find Your Dream Home</h2>
+                    <h3>Comfort, elegance, and future growth combined.</h3>
+                    <p>Let our experts guide you through the process of finding or building the perfect property that
+                        meets your needs and exceeds your expectations.</p>
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+
+                       <a href="contact.html">
+                         <button class="btn-secondary" style="border-color:var(--white);color:var(--white);">Contact
+                            Agent</button>
+                       </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-styles">
+        <div class="container text-center">
+            <h2>Meet Our Experts</h2>
+            <h5 class="mb-4">Our dedicated team of real estate professionals</h5>
+            <div class="row g-4 mt-3">
+                <div class="col-md-4 team-card">
+                    <img src="https://images.unsplash.com/photo-1557862921-37829c790f19" alt="Sophia Miller">
+                    <h5>Sophia Miller</h5>
+                    <span>Founder & CEO</span>
+                    <p>15+ years in luxury real estate development</p>
+                </div>
+                <div class="col-md-4 team-card">
+                    <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c" alt="Daniel Lee">
+                    <h5>Daniel Lee</h5>
+                    <span>Operations Head</span>
+                    <p>Expert in project management and execution</p>
+                </div>
+                <div class="col-md-4 team-card">
+                    <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12" alt="Emma Wilson">
+                    <h5>Emma Wilson</h5>
+                    <span>Sales Director</span>
+                    <p>Specializing in client relations and market strategy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="header.js"></script>
+    <div id="side-footer"></div>
+    <script src="footer.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                document.documentElement.setAttribute(
+                    'data-theme',
+                    event.matches ? 'dark' : 'light'
+                );
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

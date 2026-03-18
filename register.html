@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate</title>
+
+    <link rel="stylesheet" href="globalstyles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-dark: #530C2D;
+            --primary-medium: #904567;
+            --white: #ffffff;
+            --black: #000000;
+            --gray-light: #f8f9fa;
+            --gray-medium: #6c757d;
+            --error: #dc3545;
+            --success: #28a745;
+        }
+
+        /* ----- TYPOGRAPHY – strict scale ----- */
+        h1 {
+            font-size: 42px;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        h3 {
+            font-size: 22px;
+        }
+
+        h4 {
+            font-size: 21px;
+        }
+
+        h5,
+        h6 {
+            font-size: 19px;
+        }
+
+        p,
+        span {
+            font-size: 17px;
+        }
+
+        li,
+        a,
+        label,
+        input,
+        select,
+        textarea,
+        button,
+        .error-message,
+        .popup-small,
+        .faq-icon,
+        .toggle-link {
+            font-size: 16px;
+        }
+
+        /* ----- SECTION STYLES (exact same padding, font) ----- */
+        .section-styles {
+            padding: 40px 0;
+            width: 100%;
+            margin-top: 80px;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            margin: 0;
+            transition: background 0.2s, color 0.2s;
+            display: block;
+            min-height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "JetBrains Mono", "Cascadia Code", monospace;
+
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("images/transparent-logo-1.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 600px auto;
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        :root[data-theme="dark"] body::before {
+            opacity: 0.10;
+        }
+
+        #site-header,
+        #side-footer {
+            width: 100%;
+        }
+
+        .auth-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* ----- REGISTER/LOGIN CARD – identical to contact-form-section (max-width, shadow, radius) ----- */
+        .auth-card {
+            max-width: 750px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 50px 30px;
+            /* background: var(--white); */
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(83, 12, 45, 0.08);
+            border: 1px solid rgba(83, 12, 45, 0.1);
+            transition: background 0.2s;
+        }
+
+        /* inner container (like .section-container) */
+        .auth-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .auth-header h1 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .auth-header p {
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+            /* color: var(--gray-medium); */
+        }
+
+        /* ----- FORM (identical to contact form) ----- */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .form-group label i {
+            color: var(--primary-medium);
+            margin-right: 10px;
+        }
+
+        .required {
+            margin-left: 4px;
+            color: var(--primary-medium);
+        }
+
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--primary-medium);
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--black);
+            font-family: inherit;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .password-wrapper .form-control {
+            padding-right: 50px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--primary-medium);
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-dark);
+        }
+
+        .password-toggle:focus {
+            outline: none;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-medium);
+            box-shadow: 0 0 0 4px rgba(144, 69, 103, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--black);
+            font-size: 16px;
+        }
+
+        /* validation states */
+        .form-control.error {
+            border-color: var(--error);
+            background: rgba(220, 53, 69, 0.02);
+        }
+
+        .form-control.success {
+            border-color: var(--success);
+            background: rgba(40, 167, 69, 0.02);
+        }
+
+        .error-message {
+            color: var(--error);
+            margin-top: 8px;
+            display: none;
+            padding-left: 5px;
+        }
+
+        .error-message i {
+            margin-right: 6px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* ----- SUBMIT BUTTON (same style) ----- */
+        .submit-btn {
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 40%;
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn i {
+            font-size: 18px;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ----- TOGGLE LINK – "already registered? login" / "back to register" ----- */
+        .toggle-auth {
+            margin-top: 35px;
+            text-align: center;
+            border-top: 1px solid rgba(83, 12, 45, 0.1);
+            padding-top: 25px;
+        }
+
+        .toggle-link {
+            background: none;
+            border: none;
+            color: var(--primary-medium);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .toggle-link:hover {
+            color: var(--primary-dark);
+        }
+
+        /* ----- POPUP (SUCCESS) same design ----- */
+        .success-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid rgba(83, 12, 45, 0.1);
+        }
+
+        .success-popup.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .popup-content {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .popup-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .popup-icon i {
+            font-size: 40px;
+            color: white;
+        }
+
+        .popup-content h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .popup-content p {
+
+            margin-bottom: 5px;
+        }
+
+        /* ---------- DARK MODE – same as original, only colours ---------- */
+        [data-theme="dark"] body {
+            background: #121212;
+        }
+
+     [data-theme="dark"] .auth-card {
+    background: rgba(30, 30, 30, 0.75);   /* keeps logo visible */
+    border-color: rgba(144, 69, 103, 0.25);
+
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.35),   /* depth */
+        0 0 0 1px rgba(255, 255, 255, 0.04); /* subtle edge glow */
+    
+    backdrop-filter: blur(8px); /* optional but looks premium */
+}
+
+
+        [data-theme="dark"] .auth-header h2 {
+            color: var(--white);
+        }
+
+        [data-theme="dark"] .auth-header p {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .form-group label {
+            color: var(--white);
+        }
+
+        [data-theme="dark"] .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--white);
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .form-control:focus {
+            border-color: #d4a5c0;
+            box-shadow: 0 0 0 4px rgba(144, 69, 103, 0.2);
+        }
+
+        [data-theme="dark"] .password-toggle {
+            color: var(--white);
+        }
+
+        [data-theme="dark"] .password-toggle:hover {
+            color: var(--primary-medium);
+        }
+
+        [data-theme="dark"] .toggle-auth {
+            border-top-color: rgba(144, 69, 103, 0.2);
+        }
+
+        [data-theme="dark"] .toggle-link {
+            color: var(--white);
+        }
+
+        [data-theme="dark"] .success-popup {
+            background: #1e1e1e;
+            border-color: rgba(144, 69, 103, 0.3);
+        }
+
+        [data-theme="dark"] .popup-content h4 {
+            color: var(--primary-medium);
+        }
+
+        [data-theme="dark"] .popup-content p {
+            color: #e0e0e0;
+        }
+
+        /* responsive adjustments (same spirit) */
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 40px 20px;
+            }
+
+            .submit-btn {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .auth-card {
+                padding: 30px 15px;
+            }
+
+            .submit-btn {
+                width: 70%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .popup-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .popup-icon i {
+                font-size: 30px;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+        }
+
+        /* no containers, only sections – body flex already */
+        .auth-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+    </style>
+</head>
+
+<body>
+
+    <div id="site-header" class="fixed-top"></div>
+    <div>
+
+        <section class="section-styles auth-section">
+            <!-- auth card mimics contact-form-section -->
+            <div class="auth-card" id="authCard">
+                <div class="auth-inner">
+                    <!-- header will be swapped via JS -->
+                    <div class="auth-header" id="authHeader">
+                        <h1 id="formTitle">Create Account</h1>
+                        <p id="formSubtitle">Join us to explore exclusive properties</p>
+                    </div>
+
+                    <!-- ===== REGISTER FORM (default) ===== -->
+                    <div id="registerFormBlock">
+                        <form class="contact-form" id="registerForm" novalidate>
+                            <!-- FULL NAME - letters only, no spaces -->
+                            <div class="form-group">
+                                <label for="regName"> Full Name <span class="required">*</span></label>
+                                <input type="text" id="regName" class="form-control"
+                                    placeholder="Your full name (letters only)">
+                                <div class="error-message" id="regNameError">
+                                    Only letters, no spaces</div>
+                            </div>
+                            <!-- EMAIL - @gmail.com only -->
+                            <div class="form-group">
+                                <label for="regEmail"> Email <span class="required">*</span></label>
+                                <input type="email" id="regEmail" class="form-control" placeholder="example@gmail.com">
+                                <div class="error-message" id="regEmailError">
+                                    Only @gmail.com, no spaces</div>
+                            </div>
+                            <!-- PHONE - 10 digits, start 6-9 -->
+                            <div class="form-group">
+                                <label for="regPhone"> Phone <span class="required">*</span></label>
+                                <input type="tel" id="regPhone" class="form-control" placeholder="10 digits, start 6-9">
+                                <div class="error-message" id="regPhoneError"><i class="bi bi-exclamation-circle"></i>
+                                    10 digits, first 6-9</div>
+                            </div>
+                            <!-- PASSWORD - new field, min 6 chars, no spaces -->
+                            <div class="form-group">
+                                <label for="regPassword"> Password <span class="required">*</span></label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="regPassword" class="form-control"
+                                        placeholder="Minimum 6 characters">
+                                    <button type="button" class="password-toggle" id="toggleRegPassword" tabindex="-1">
+                                        <i class="bi bi-eye-slash"></i>
+                                    </button>
+                                </div>
+                                <div class="error-message" id="regPasswordError"><i
+                                        class="bi bi-exclamation-circle"></i> Min 6 chars, no spaces</div>
+                            </div>
+                            <!-- CONFIRM PASSWORD -->
+                            <div class="form-group">
+                                <label for="regConfirm"> Confirm Password <span class="required">*</span></label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="regConfirm" class="form-control"
+                                        placeholder="Re-enter password">
+                                    <button type="button" class="password-toggle" id="toggleRegConfirm" tabindex="-1">
+                                        <i class="bi bi-eye-slash"></i>
+                                    </button>
+                                </div>
+                                <div class="error-message" id="regConfirmError">
+                                    Passwords must match</div>
+                            </div>
+
+                            <button type="submit" class="submit-btn" id="registerBtn"><i class="bi bi-person-plus"></i>
+                                Register</button>
+                        </form>
+                    </div>
+
+                    <!-- ===== LOGIN FORM (hidden by default) ===== -->
+                    <div id="loginFormBlock" style="display: none;">
+                        <form class="contact-form" id="loginForm" novalidate>
+                            <!-- EMAIL - @gmail.com -->
+                            <div class="form-group">
+                                <label for="loginEmail"> Email <span
+                                        class="required">*</span></label>
+                                <input type="email" id="loginEmail" class="form-control"
+                                    placeholder="your.email@gmail.com">
+                                <div class="error-message" id="loginEmailError"><i class="bi bi-exclamation-circle"></i>
+                                    Valid @gmail.com required</div>
+                            </div>
+                            <!-- PASSWORD -->
+                            <div class="form-group">
+                                <label for="loginPassword"> Password <span
+                                        class="required">*</span></label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="loginPassword" class="form-control"
+                                        placeholder="Enter password">
+                                    <button type="button" class="password-toggle" id="toggleLoginPassword" tabindex="-1">
+                                        <i class="bi bi-eye-slash"></i>
+                                    </button>
+                                </div>
+                                <div class="error-message" id="loginPasswordError"><i
+                                        class="bi bi-exclamation-circle"></i> Password cannot be empty</div>
+                            </div>
+                            <button type="submit" class="submit-btn" id="loginBtn"><i
+                                    class="bi bi-box-arrow-in-right"></i> Login</button>
+                        </form>
+                    </div>
+
+                    <!-- ===== TOGGLE LINK (already registered? / back to register) ===== -->
+                    <div class="toggle-auth">
+                        <span id="toggleText" style="margin-right: 5px;">Already have an
+                            account?</span>
+                        <button class="toggle-link" id="toggleAuthBtn">Click here to login</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUCCESS POPUP (same style, used for both) -->
+        <div class="success-popup" id="authSuccessPopup">
+            <div class="popup-content">
+                <div class="popup-icon">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+                <h4 id="popupTitle">Success!</h4>
+                <p id="popupMessage">Your account has been created.</p>
+                <p class="popup-small" id="popupSmall">Welcome to Real Estate.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="side-footer"></div>
+
+    <script src="footer.js"></script>
+    <script src="header.js"></script>
+
+    <!-- Bootstrap JS MUST come before custom navbar script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (function () {
+            "use strict";
+
+            // ----- THEME (sync with localStorage) – replicates original behavior -----
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+
+            // ----- TOGGLE BETWEEN REGISTER AND LOGIN -----
+            const registerBlock = document.getElementById('registerFormBlock');
+            const loginBlock = document.getElementById('loginFormBlock');
+            const toggleBtn = document.getElementById('toggleAuthBtn');
+            const toggleText = document.getElementById('toggleText');
+            const formTitle = document.getElementById('formTitle');
+            const formSubtitle = document.getElementById('formSubtitle');
+
+            let isLogin = false; // default: register
+
+            function showRegister() {
+                registerBlock.style.display = 'block';
+                loginBlock.style.display = 'none';
+                formTitle.innerText = 'Create Account';
+                formSubtitle.innerText = 'Join us to explore exclusive properties';
+                toggleText.innerText = 'Already have an account?';
+                toggleBtn.innerText = 'Click here to login';
+                isLogin = false;
+
+                // Clear all validation states and reset forms
+                resetForm('registerForm');
+                resetForm('loginForm');
+            }
+
+            function showLogin() {
+                registerBlock.style.display = 'none';
+                loginBlock.style.display = 'block';
+                formTitle.innerText = 'Welcome Back';
+                formSubtitle.innerText = 'Log in to continue your property search';
+                toggleText.innerText = 'New to Real Estate?';
+                toggleBtn.innerText = 'Create an account';
+                isLogin = true;
+
+                // Clear all validation states and reset forms
+                resetForm('registerForm');
+                resetForm('loginForm');
+            }
+
+            // Function to reset form fields and validation states
+            function resetForm(formId) {
+                const form = document.getElementById(formId);
+                if (form) {
+                    form.reset();
+                    document.querySelectorAll(`#${formId} .form-control`).forEach(f => {
+                        f.classList.remove('error', 'success');
+                    });
+                    document.querySelectorAll(`#${formId} .error-message`).forEach(e => {
+                        e.classList.remove('show');
+                    });
+                }
+            }
+
+            // initial: ensure register visible, login hidden
+            showRegister();
+
+            toggleBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (isLogin) {
+                    showRegister();
+                } else {
+                    showLogin();
+                }
+            });
+
+            // ----- PASSWORD TOGGLE FUNCTIONALITY -----
+            function initPasswordToggle() {
+                // Register password toggle
+                const toggleRegPassword = document.getElementById('toggleRegPassword');
+                const regPassword = document.getElementById('regPassword');
+                
+                if (toggleRegPassword && regPassword) {
+                    toggleRegPassword.addEventListener('click', function () {
+                        const type = regPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                        regPassword.setAttribute('type', type);
+                        this.querySelector('i').classList.toggle('bi-eye');
+                        this.querySelector('i').classList.toggle('bi-eye-slash');
+                    });
+                }
+
+                // Register confirm password toggle
+                const toggleRegConfirm = document.getElementById('toggleRegConfirm');
+                const regConfirm = document.getElementById('regConfirm');
+                
+                if (toggleRegConfirm && regConfirm) {
+                    toggleRegConfirm.addEventListener('click', function () {
+                        const type = regConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
+                        regConfirm.setAttribute('type', type);
+                        this.querySelector('i').classList.toggle('bi-eye');
+                        this.querySelector('i').classList.toggle('bi-eye-slash');
+                    });
+                }
+
+                // Login password toggle
+                const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+                const loginPassword = document.getElementById('loginPassword');
+                
+                if (toggleLoginPassword && loginPassword) {
+                    toggleLoginPassword.addEventListener('click', function () {
+                        const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                        loginPassword.setAttribute('type', type);
+                        this.querySelector('i').classList.toggle('bi-eye');
+                        this.querySelector('i').classList.toggle('bi-eye-slash');
+                    });
+                }
+            }
+
+            // Initialize password toggles
+            initPasswordToggle();
+
+            // ----- VALIDATION HELPERS (exactly like original) -----
+            function setInvalid(field, errorEl, msg) {
+                field.classList.add('error');
+                field.classList.remove('success');
+                errorEl.innerHTML = '<i class="bi bi-exclamation-circle"></i> ' + msg;
+                errorEl.classList.add('show');
+            }
+
+            function setValid(field, errorEl) {
+                field.classList.remove('error');
+                field.classList.add('success');
+                errorEl.classList.remove('show');
+            }
+
+            // ---------- REGISTER FORM VALIDATION (strict) ----------
+            const regForm = document.getElementById('registerForm');
+            const regName = document.getElementById('regName');
+            const regEmail = document.getElementById('regEmail');
+            const regPhone = document.getElementById('regPhone');
+            const regPassword = document.getElementById('regPassword');
+            const regConfirm = document.getElementById('regConfirm');
+
+            const regNameErr = document.getElementById('regNameError');
+            const regEmailErr = document.getElementById('regEmailError');
+            const regPhoneErr = document.getElementById('regPhoneError');
+            const regPassErr = document.getElementById('regPasswordError');
+            const regConfirmErr = document.getElementById('regConfirmError');
+
+            // Password restriction - NO SPACES ALLOWED
+            function preventSpaces(e) {
+                if (e.key === ' ') {
+                    e.preventDefault();
+                }
+            }
+
+            // Add space prevention to all password fields
+            regPassword.addEventListener('keypress', preventSpaces);
+            regConfirm.addEventListener('keypress', preventSpaces);
+
+            // Also prevent paste with spaces
+            regPassword.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text').replace(/\s/g, '');
+                regPassword.value = text;
+                validateRegPassword();
+            });
+
+            regConfirm.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text').replace(/\s/g, '');
+                regConfirm.value = text;
+                validateRegConfirm();
+            });
+
+            // register validators
+            function validateRegName() {
+                const val = regName.value;
+                if (val === '') return setInvalid(regName, regNameErr, 'Name cannot be empty'), false;
+                if (/\s/.test(val)) return setInvalid(regName, regNameErr, 'Spaces not allowed'), false;
+                if (/\d/.test(val)) return setInvalid(regName, regNameErr, 'No numbers allowed'), false;
+                if (!/^[A-Za-z]+$/.test(val)) return setInvalid(regName, regNameErr, 'Only letters A-Z'), false;
+                setValid(regName, regNameErr); return true;
+            }
+
+            function validateRegEmail() {
+                const val = regEmail.value.trim();
+                const regex =/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|net)$/i;
+                if (val === '') return setInvalid(regEmail, regEmailErr, 'Email required'), false;
+                if (/\s/.test(val)) return setInvalid(regEmail, regEmailErr, 'No spaces'), false;
+                if (!regex.test(val)) return setInvalid(regEmail, regEmailErr, 'Must be @gmail.com'), false;
+                setValid(regEmail, regEmailErr); return true;
+            }
+
+            function validateRegPhone() {
+                let val = regPhone.value.replace(/\s/g, '');
+                regPhone.value = val;
+                if (val === '') return setInvalid(regPhone, regPhoneErr, 'Phone required'), false;
+                if (!/^[0-9]+$/.test(val)) return setInvalid(regPhone, regPhoneErr, 'Digits only'), false;
+                if (val.length !== 10) return setInvalid(regPhone, regPhoneErr, 'Exactly 10 digits'), false;
+                if (val[0] < '6' || val[0] > '9') return setInvalid(regPhone, regPhoneErr, 'Start with 6-9'), false;
+                setValid(regPhone, regPhoneErr); return true;
+            }
+
+            function validateRegPassword() {
+                const val = regPassword.value;
+                if (val === '') return setInvalid(regPassword, regPassErr, 'Password required'), false;
+                if (/\s/.test(val)) return setInvalid(regPassword, regPassErr, 'No spaces allowed'), false;
+                if (val.length < 6) return setInvalid(regPassword, regPassErr, 'Minimum 6 characters'), false;
+                setValid(regPassword, regPassErr); return true;
+            }
+
+            function validateRegConfirm() {
+                const pass = regPassword.value;
+                const conf = regConfirm.value;
+                if (conf === '') return setInvalid(regConfirm, regConfirmErr, 'Confirm password'), false;
+                if (/\s/.test(conf)) return setInvalid(regConfirm, regConfirmErr, 'No spaces allowed'), false;
+                if (pass !== conf) return setInvalid(regConfirm, regConfirmErr, 'Passwords do not match'), false;
+                setValid(regConfirm, regConfirmErr); return true;
+            }
+
+            // input restrictions
+            regName.addEventListener('keypress', function (e) {
+                if (!/^[A-Za-z]$/.test(e.key)) e.preventDefault();
+            });
+            regName.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text').replace(/[^A-Za-z]/g, '');
+                regName.value = text;
+                validateRegName();
+            });
+
+            regPhone.addEventListener('keypress', function (e) {
+                if (!/^[0-9]$/.test(e.key)) {
+                    e.preventDefault();
+                }
+                if (regPhone.value.length === 0 && !/^[6-9]$/.test(e.key)) {
+                    e.preventDefault();
+                    regPhoneErr.innerHTML = '<i class="bi bi-exclamation-circle"></i> First digit 6-9';
+                    regPhoneErr.classList.add('show');
+                    regPhone.classList.add('error');
+                }
+            });
+
+            regPhone.addEventListener('input', function () {
+                let val = regPhone.value.replace(/[^0-9]/g, '');
+                if (val.length > 10) val = val.slice(0, 10);
+                regPhone.value = val;
+            });
+
+            regEmail.addEventListener('keypress', function (e) {
+                if (e.key === ' ') e.preventDefault();
+            });
+
+            // real-time validation
+            regName.addEventListener('input', validateRegName);
+            regEmail.addEventListener('input', validateRegEmail);
+            regPhone.addEventListener('input', validateRegPhone);
+            regPassword.addEventListener('input', validateRegPassword);
+            regConfirm.addEventListener('input', validateRegConfirm);
+
+            ['blur'].forEach(ev => {
+                regName.addEventListener(ev, validateRegName);
+                regEmail.addEventListener(ev, validateRegEmail);
+                regPhone.addEventListener(ev, validateRegPhone);
+                regPassword.addEventListener(ev, validateRegPassword);
+                regConfirm.addEventListener(ev, validateRegConfirm);
+            });
+
+            // ---------- LOGIN FORM VALIDATION ----------
+            const loginForm = document.getElementById('loginForm');
+            const loginEmail = document.getElementById('loginEmail');
+            const loginPassword = document.getElementById('loginPassword');
+            const loginEmailErr = document.getElementById('loginEmailError');
+            const loginPassErr = document.getElementById('loginPasswordError');
+
+            // Prevent spaces in login password
+            loginPassword.addEventListener('keypress', preventSpaces);
+            loginPassword.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text').replace(/\s/g, '');
+                loginPassword.value = text;
+                validateLoginPassword();
+            });
+
+            function validateLoginEmail() {
+                const val = loginEmail.value.trim();
+                if (val === '') return setInvalid(loginEmail, loginEmailErr, 'Email required'), false;
+                if (/\s/.test(val)) return setInvalid(loginEmail, loginEmailErr, 'No spaces'), false;
+                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|net)$/i.test(val))
+                    return setInvalid(loginEmail, loginEmailErr, 'Must be @gmail.com'), false;
+                setValid(loginEmail, loginEmailErr); return true;
+            }
+
+            function validateLoginPassword() {
+                const val = loginPassword.value;
+                if (val === '') return setInvalid(loginPassword, loginPassErr, 'Password required'), false;
+                if (/\s/.test(val)) return setInvalid(loginPassword, loginPassErr, 'No spaces allowed'), false;
+                setValid(loginPassword, loginPassErr); return true;
+            }
+
+            loginEmail.addEventListener('input', validateLoginEmail);
+            loginPassword.addEventListener('input', validateLoginPassword);
+            loginEmail.addEventListener('blur', validateLoginEmail);
+            loginPassword.addEventListener('blur', validateLoginPassword);
+            loginEmail.addEventListener('keypress', function (e) {
+                if (e.key === ' ') e.preventDefault();
+            });
+
+            // ---------- SUBMIT HANDLERS (with success popup) ----------
+            const successPopup = document.getElementById('authSuccessPopup');
+            const popupTitle = document.getElementById('popupTitle');
+            const popupMsg = document.getElementById('popupMessage');
+            const popupSmall = document.getElementById('popupSmall');
+
+            function showSuccess(title, msg, small) {
+                popupTitle.innerText = title;
+                popupMsg.innerText = msg;
+                popupSmall.innerText = small || 'Welcome to Real Estate.';
+                successPopup.classList.add('show');
+
+                // Auto hide after 3 seconds
+                setTimeout(() => {
+                    successPopup.classList.remove('show');
+                }, 3000);
+            }
+
+            // register submit
+            regForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const v1 = validateRegName(), v2 = validateRegEmail(), v3 = validateRegPhone(),
+                    v4 = validateRegPassword(), v5 = validateRegConfirm();
+
+                if (v1 && v2 && v3 && v4 && v5) {
+                    const registerBtn = document.getElementById('registerBtn');
+                    registerBtn.disabled = true;
+                    registerBtn.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> Creating...';
+
+                    setTimeout(() => {
+                        // Show success popup
+                        showSuccess('Welcome!', 'Registration successful.', 'You can now login.');
+
+                        // Reset form and remove validation states
+                        regForm.reset();
+                        document.querySelectorAll('#registerForm .form-control').forEach(f => {
+                            f.classList.remove('success', 'error');
+                        });
+                        document.querySelectorAll('#registerForm .error-message').forEach(e => {
+                            e.classList.remove('show');
+                        });
+
+                        // Reset password toggle icons to eye-slash (hidden state)
+                        const toggleRegPassword = document.getElementById('toggleRegPassword');
+                        const toggleRegConfirm = document.getElementById('toggleRegConfirm');
+                        if (toggleRegPassword) {
+                            toggleRegPassword.querySelector('i').className = 'bi bi-eye-slash';
+                        }
+                        if (toggleRegConfirm) {
+                            toggleRegConfirm.querySelector('i').className = 'bi bi-eye-slash';
+                        }
+
+                        // Reset button
+                        registerBtn.disabled = false;
+                        registerBtn.innerHTML = '<i class="bi bi-person-plus"></i> Register';
+
+                    }, 1200);
+                }
+            });
+            
+            // login submit
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const v1 = validateLoginEmail(), v2 = validateLoginPassword();
+
+                if (v1 && v2) {
+                    const loginBtn = document.getElementById('loginBtn');
+                    loginBtn.disabled = true;
+                    loginBtn.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> Logging in...';
+
+                    setTimeout(() => {
+                        // Show success popup
+                        showSuccess('Welcome Back!', 'Login successful');
+
+                        // Reset form and remove validation states
+                        loginForm.reset();
+                        document.querySelectorAll('#loginForm .form-control').forEach(f => {
+                            f.classList.remove('success', 'error');
+                        });
+                        document.querySelectorAll('#loginForm .error-message').forEach(e => {
+                            e.classList.remove('show');
+                        });
+
+                        // Reset login password toggle icon to eye-slash (hidden state)
+                        const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+                        if (toggleLoginPassword) {
+                            toggleLoginPassword.querySelector('i').className = 'bi bi-eye-slash';
+                        }
+
+                        // Reset button
+                        loginBtn.disabled = false;
+                        loginBtn.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+
+                    }, 1200);
+                }
+            });
+
+            // click outside popup close (same as original)
+            document.addEventListener('click', function (e) {
+                if (successPopup.classList.contains('show') && !successPopup.contains(e.target)) {
+                    successPopup.classList.remove('show');
+                }
+            });
+
+            // Add spin animation style if not present
+            if (!document.querySelector('#spin-style')) {
+                const style = document.createElement('style');
+                style.id = 'spin-style';
+                style.textContent = `
+                .bi-arrow-repeat.spin {
+                    animation: spin 1s infinite linear;
+                }
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+            `;
+                document.head.appendChild(style);
+            }
+
+        })();
+    </script>
+</body>
+
+</html>

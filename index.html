@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate</title>
+
+  <link rel="stylesheet" href="globalstyles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #ffffff;
+      --text-main: #000000;
+      --primary: #530C2D;
+      --secondary: #904567;
+
+      --re-bg: var(--bg-main);
+      --re-text: var(--text-main);
+      --re-primary: var(--primary);
+      --re-secondary: var(--secondary);
+    }
+
+    :root[data-theme="dark"] {
+      --bg-main: #000000;
+      --text-main: #ffffff;
+
+      --re-bg: #000000;
+      --re-text: #ffffff;
+    }
+
+    body {
+      font-family: "JetBrains Mono", "Cascadia Code", "Fira Code";
+      padding-top: 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+    }
+
+    .realestate-page {
+      /* background-color: var(--re-bg); */
+      color: var(--re-text);
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .realestate-page h1 {
+      font-size: 42px
+    }
+
+    .realestate-page h2 {
+      font-size: 32px
+    }
+
+    .realestate-page h3 {
+      font-size: 22px
+    }
+
+    .realestate-page h4 {
+      font-size: 21px
+    }
+
+    .realestate-page h5,
+    .realestate-page h6 {
+      font-size: 19px
+    }
+
+    .realestate-page p,
+    .realestate-page span {
+      font-size: 17px
+    }
+
+    .realestate-page a,
+    .realestate-page li {
+      font-size: 16px
+    }
+
+    .realestate-page .section {
+      padding: 40px;
+    }
+
+    .realestate-page .container-max {
+      max-width: 1280px;
+      margin: auto;
+    }
+
+    .realestate-page .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .realestate-page .btn-main {
+      background: var(--re-primary);
+      color: #ffffff;
+      padding: 12px 24px;
+      text-decoration: none;
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .realestate-page .hero-img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .realestate-page .stat-box {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: var(--re-secondary);
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    :root[data-theme="dark"] .realestate-page {
+      /* background-color: var(--text-main); */
+    }
+
+    .realestate-page .about-images {
+      display: flex;
+      gap: 20px;
+    }
+
+    .realestate-page .about-images .big {
+      width: 60%;
+      border-radius: 12px;
+    }
+
+    .realestate-page .about-images .stack {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .realestate-page .about-images img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .realestate-page .logo-strip {
+      display: flex;
+      gap: 80px;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;
+      padding: 20px 0;
+    }
+
+    .realestate-page .logo-strip img {
+      height: 90px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .realestate-page .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .realestate-page .service-card {
+      display: flex;
+      gap: 20px;
+      padding: 24px;
+      background: #f4f6fb;
+      border-radius: 12px;
+      transition: background-color 0.3s ease;
+    }
+
+    :root[data-theme="dark"] .realestate-page .service-card {
+      background: #111111;
+    }
+
+    .realestate-page .icon-box {
+      background: var(--re-primary);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 8px;
+    }
+
+    .realestate-page .icon-box i {
+      color: #ffffff;
+      line-height: 1;
+      font-size: 20px;
+    }
+
+    .realestate-page .choose-section {
+      background: var(--re-primary);
+      color: #ffffff;
+      transition: background-color 0.3s ease;
+    }
+
+    .realestate-page .choose-feature {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .choose-feature .icon-box {
+      background-color: var(--secondary);
+    }
+
+    .why-label {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+
+    .why-title {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .why-desc {
+      max-width: 520px;
+      margin-bottom: 28px;
+      opacity: 0.95;
+    }
+
+    @media (max-width:1024px) {
+      .realestate-page .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width:768px) {
+      .realestate-page .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .realestate-page .hero-img {
+        height: 260px;
+      }
+
+      .realestate-page .watermark {
+        font-size: 80px;
+      }
+    }
+
+    :root[data-theme="dark"] .realestate-page .choose-section {
+      background-color: var(--bg-main);
+    }
+
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("images/transparent-logo-1.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 600px auto;
+      opacity: 0.10;
+      pointer-events: none;
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    :root[data-theme="dark"] body::before {
+      opacity: 0.10;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="site-header" class="fixed-top"></div>
+
+
+  <div class="realestate-page">
+
+    <div class="section">
+      <div class="container-max grid-2 position-relative">
+        <div>
+          <h1>Smart Real Estate Solutions</h1>
+          <p>We deliver reliable real-estate consulting, investment planning, and property management services focused
+            on long-term value.</p>
+          <p>We deliver reliable real-estate consulting, investment planning, and property management services focused
+            on long-term value creation.</p>
+          <a href="contact.html">
+            <button class="btn-main">Get Consultation</button>
+          </a>
+        </div>
+
+        <div class="position-relative">
+          <img class="hero-img"
+            src="https://thumbs.dreamstime.com/b/modern-real-estate-house-building-city-construction-concept-evening-outdoor-urban-view-homes-40083842.jpg">
+          <div class="stat-box">
+            <h3>15%</h3>
+            <p>Annual Growth</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container-max grid-2">
+        <div class="about-images">
+          <img class="big" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994">
+          <div class="stack">
+            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+          </div>
+        </div>
+        <div>
+          <h2>Trusted Property Experts</h2>
+          <p>Our market-driven insights combine property research, local demand analysis, and future growth forecasting
+            to help clients maximize returns with confidence.</p>
+          <p>Backed by deep market knowledge and proven experience, we deliver reliable real-estate guidance that helps
+            clients make confident property decisions.</p>
+          <a href="home2.html">
+            <button class="btn-main">Learn More</button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="text-center mb-4">Trusted by Industry Experts</h2>
+      <div class="container-max logo-strip">
+        <img src="https://www.shutterstock.com/image-vector/real-estate-logo-260nw-338910956.jpg">
+        <img
+          src="https://marketplace.canva.com/EAGTwK0wOTg/2/0/1600w/canva-black-and-white-minimalistic-real-estate-flat-illustrative-logo-afTi-1EmZtc.jpg">
+        <img
+          src="https://media.gettyimages.com/id/2208597979/vector/real-estate-symbol-design.jpg?s=612x612&w=gi&k=20&c=chyBccgki4alXY8JBQtAjTyQw1EmW4OzVkWr3E6-Uko=">
+        <img
+          src="https://thumbs.dreamstime.com/b/crative-real-estate-logo-vector-elegant-modern-hidden-object-negative-space-concept-86032400.jpg">
+        <img
+          src="https://thumbs.dreamstime.com/b/home-property-logo-vector-design-home-property-logo-vector-design-simple-trendy-modern-suitable-construction-icon-174911759.jpg">
+        <img
+          src="https://images-platform.99static.com//c_APfh67O7Eo9eVGml-ucdkHTV8=/541x63:1193x716/fit-in/500x500/99designs-contests-attachments/136/136492/attachment_136492670">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_xckO26UkskE0x63wAAGRyXYGThZZ9Nv-gw&s">
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section">
+      <h2 style="display: block;text-align: center;margin-bottom:40px;">Our Range of Services</h2>
+
+      <div class="container-max services-grid">
+        <div class="service-card">
+          <div class="icon-box">
+            <i class="bi bi-lightning-fill"></i>
+          </div>
+
+          <div>
+            <h3>Interior Planning</h3>
+            <p>Smart interiors improving comfort, space efficiency, and value.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box">
+            <i class="bi bi-lightning-fill"></i>
+          </div>
+          <div>
+            <h3>Exterior Development</h3>
+            <p>Modern exterior designs enhancing durability and appeal.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box">
+            <i class="bi bi-lightning-fill"></i>
+          </div>
+          <div>
+            <h3>Indoor Optimization</h3>
+            <p>Functional layouts focused on lifestyle and usability.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box">
+            <i class="bi bi-lightning-fill"></i>
+          </div>
+          <div>
+            <h3>Outdoor Spaces</h3>
+            <p>Well-planned landscapes and open living environments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section choose-section">
+      <div class="container-max grid-2">
+        <div>
+          <h2 class="why-title">Built on Trust  Driven by Results.</h2>
+          <p class="why-desc">
+            We combine deep market expertise, transparent processes, and long-term vision
+            to deliver reliable real-estate solutions that consistently outperform expectations.
+          </p>
+
+          <div class="choose-feature">
+            <div class="icon-box"><i class="bi bi-lightning-fill"></i></div>
+            <div>
+              <h3>Experience & Expertise</h3>
+              <p>Years of proven real-estate industry knowledge.</p>
+            </div>
+          </div>
+
+          <div class="choose-feature">
+            <div class="icon-box"><i class="bi bi-lightning-fill"></i></div>
+            <div>
+              <h3>Comprehensive Coverage</h3>
+              <p>Complete solutions from investment to management.</p>
+            </div>
+          </div>
+
+          <div class="choose-feature">
+            <div class="icon-box"><i class="bi bi-lightning-fill"></i></div>
+            <div>
+              <h3>Customer-Centric Approach</h3>
+              <p>Focused on trust, transparency, and long-term value.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="position-relative">
+          <img class="hero-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+          <div class="stat-box" style="background:#fff;color:#000">
+            <h3>90%</h3>
+            <p>Customer Satisfaction</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="side-footer"></div>
+  <script src="footer.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="header.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const navbarToggler = document.querySelector('.navbar-toggler-custom');
+      const navbarCollapse = document.getElementById('navbarContent');
+
+      if (navbarToggler && navbarCollapse) {
+        navbarCollapse.addEventListener('show.bs.collapse', function () {
+          navbarToggler.classList.add('active');
+          navbarToggler.setAttribute('aria-expanded', 'true');
+        });
+
+        navbarCollapse.addEventListener('hide.bs.collapse', function () {
+          navbarToggler.classList.remove('active');
+          navbarToggler.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
