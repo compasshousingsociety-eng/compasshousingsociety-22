@@ -463,7 +463,7 @@
                 return false;
             }
 
-            const emailPattern =/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|net)$/;
+            const emailPattern =/^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.(com|in|org|net)$/i;
 
             if (!emailPattern.test(rawValue)) {
                 alert("❌ Please enter a valid @gmail.com email");
