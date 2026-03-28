@@ -345,7 +345,7 @@
             position: relative;
         }
 
-    
+
 
         .faq-item {
             margin-bottom: 16px;
@@ -627,7 +627,8 @@
                                 </i> Subject <span class="required">*</span>
                             </label>
                             <select id="subject" class="form-control">
-                                <option value=""></option>
+                                <option value="" disabled selected hidden>Select here</option>
+
                                 <option value="property-inquiry">Property Inquiry</option>
                                 <option value="investment-advice">Investment Advice</option>
                                 <option value="property-valuation">Property Valuation</option>
@@ -803,7 +804,7 @@
 
             function validateEmail() {
                 const val = emailInput.value.trim();
-                const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|net)$/i;
+                const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.(com|in|org|net)$/i;
                 if (val === '') {
                     setInvalid(emailInput, emailError, 'Email cannot be empty');
                     return false;
