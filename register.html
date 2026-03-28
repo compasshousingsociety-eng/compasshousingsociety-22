@@ -806,7 +806,7 @@ input[type="password"]::-ms-clear {
 
             function validateRegEmail() {
                 const val = regEmail.value.trim();
-                const regex =/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|net)$/i;
+                const regex =/^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.(com|in|org|net)$/i;
                 if (val === '') return setInvalid(regEmail, regEmailErr, 'Email required'), false;
                 if (/\s/.test(val)) return setInvalid(regEmail, regEmailErr, 'No spaces'), false;
                 if (!regex.test(val)) return setInvalid(regEmail, regEmailErr, 'Must be @gmail.com'), false;
@@ -908,7 +908,7 @@ input[type="password"]::-ms-clear {
                 const val = loginEmail.value.trim();
                 if (val === '') return setInvalid(loginEmail, loginEmailErr, 'Email required'), false;
                 if (/\s/.test(val)) return setInvalid(loginEmail, loginEmailErr, 'No spaces'), false;
-                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|net)$/i.test(val))
+                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.(com|in|org|net)$/i.test(val))
                     return setInvalid(loginEmail, loginEmailErr, 'Must be @gmail.com'), false;
                 setValid(loginEmail, loginEmailErr); return true;
             }
