@@ -82,20 +82,18 @@ const header = `
           </li>
   <!-- MOBILE THEME TOGGLE (Only visible on mobile) -->
         <div class="mobile-theme-toggle d-lg-none">
-          <button id="themeToggle"
-  class="btn border border-white text-white d-flex align-items-center gap-2 px-3">
-  <i id="themeIcon" class="bi bi-moon-fill"></i>
-  <span id="themeText">Dark Mode</span>
+       <button class="themeToggle btn border border-white text-white d-flex align-items-center gap-2 px-3">
+  <i class="themeIcon bi bi-moon-fill"></i>
+  <span class="themeText">Dark Mode</span>
 </button>
         </div>
         </ul>
 
         <!-- DESKTOP RIGHT SECTION (Only visible on desktop) -->
         <div class="navbar-right-section d-none d-lg-flex">
-       <button id="themeToggle"
-  class="btn border border-white text-white d-flex align-items-center gap-2 px-3">
-  <i id="themeIcon" class="bi bi-moon-fill"></i>
-  <span id="themeText">Dark Mode</span>
+       <button class="themeToggle btn border border-white text-white d-flex align-items-center gap-2 px-3">
+  <i class="themeIcon bi bi-moon-fill"></i>
+  <span class="themeText">Dark Mode</span>
 </button>
          <a href="register.html"
    class="d-flex align-items-center justify-content-center rounded-circle border border-light text-white text-decoration-none"
@@ -364,22 +362,34 @@ function handleMobileDropdowns() {
       }
     }
   });
+const buttons = document.querySelectorAll(".themeToggle");
 
-  const btn = document.getElementById("themeToggle");
-const icon = document.getElementById("themeIcon");
-const text = document.getElementById("themeText");
+function updateUI() {
+  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
 
-btn.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
+  document.querySelectorAll(".themeIcon").forEach(icon => {
+    icon.classList.toggle("bi-moon-fill", !isDark);
+    icon.classList.toggle("bi-sun-fill", isDark);
+  });
 
-  if (document.body.classList.contains("dark-mode")) {
-    // Dark mode ON
-    icon.classList.replace("bi-moon-fill", "bi-sun-fill");
-    text.textContent = "Light Mode";
-  } else {
-    // Light mode ON
-    icon.classList.replace("bi-sun-fill", "bi-moon-fill");
-    text.textContent = "Dark Mode";
-  }
+  document.querySelectorAll(".themeText").forEach(text => {
+    text.textContent = isDark ? "Light Mode" : "Dark Mode";
+  });
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme");
+  const newTheme = current === "dark" ? "light" : "dark";
+
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+
+  updateUI();
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", toggleTheme);
 });
+
+updateUI();
 }
