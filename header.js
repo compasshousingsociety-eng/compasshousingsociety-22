@@ -45,7 +45,7 @@ const header = `
           </li>
 
           <li class="nav-item">
-            <a class="nav-link-main" href="aboutus.html">About</a>
+            <a class="nav-link-main"  href="aboutus.html">About</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -82,17 +82,21 @@ const header = `
           </li>
   <!-- MOBILE THEME TOGGLE (Only visible on mobile) -->
         <div class="mobile-theme-toggle d-lg-none">
-          <button class="theme-toggle-btn" id="mobileThemeToggle" aria-label="Toggle theme">
-            <div class="theme-toggle-slider"></div>
-          </button>
+          <button id="themeToggle"
+  class="btn border border-white text-white d-flex align-items-center gap-2 px-3">
+  <i id="themeIcon" class="bi bi-moon-fill"></i>
+  <span id="themeText">Dark Mode</span>
+</button>
         </div>
         </ul>
 
         <!-- DESKTOP RIGHT SECTION (Only visible on desktop) -->
         <div class="navbar-right-section d-none d-lg-flex">
-          <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle theme">
-            <div class="theme-toggle-slider"></div>
-          </button>
+       <button id="themeToggle"
+  class="btn border border-white text-white d-flex align-items-center gap-2 px-3">
+  <i id="themeIcon" class="bi bi-moon-fill"></i>
+  <span id="themeText">Dark Mode</span>
+</button>
          <a href="register.html"
    class="d-flex align-items-center justify-content-center rounded-circle border border-light text-white text-decoration-none"
    style="width:42px;height:42px;">
@@ -360,4 +364,22 @@ function handleMobileDropdowns() {
       }
     }
   });
+
+  const btn = document.getElementById("themeToggle");
+const icon = document.getElementById("themeIcon");
+const text = document.getElementById("themeText");
+
+btn.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  if (document.body.classList.contains("dark-mode")) {
+    // Dark mode ON
+    icon.classList.replace("bi-moon-fill", "bi-sun-fill");
+    text.textContent = "Light Mode";
+  } else {
+    // Light mode ON
+    icon.classList.replace("bi-sun-fill", "bi-moon-fill");
+    text.textContent = "Dark Mode";
+  }
+});
 }
