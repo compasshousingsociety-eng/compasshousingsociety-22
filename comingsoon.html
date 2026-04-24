@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate</title>
+
+    <link rel="stylesheet" href="globalstyles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "JetBrains Mono", "Cascadia Code", monospace;
+            background: transparent;
+        }
+
+        /* SECTION BASE */
+        .section {
+            display: block;
+            text-align: center;
+            padding: 40px 20px;
+           
+        }
+
+        /* WATERMARK / LOGO */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("images/transparent-logo-1.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 600px auto;
+            opacity: 0.10;
+            /* Light mode */
+            pointer-events: none;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        /* DARK MODE WATERMARK */
+        html[data-theme="dark"] body::before {
+            opacity: 0.10;
+        }
+
+        /* DARK MODE BASE */
+        html[data-theme="dark"] body {
+            background: transparent;
+            color: white;
+        }
+
+        /* TYPOGRAPHY RULES (STRICT & SCOPED) */
+        .section h1 {
+            font-size: 42px;
+            /* color: #530C2D; */
+        }
+
+        .section h2 {
+            font-size: 32px;
+            /* color: #530C2D; */
+        }
+
+        .section h3 {
+            font-size: 22px;
+            /* color: #530C2D; */
+        }
+
+        .section h4 {
+            font-size: 21px;
+            /* color: #530C2D; */
+        }
+
+        .section h5,
+        .section h6 {
+            font-size: 19px;
+            /* color: #530C2D; */
+        }
+
+        .section p,
+        .section span {
+            font-size: 17px;
+            /* color: #904567; */
+        }
+
+        .section li,
+        .section a,
+        .section button {
+            font-size: 16px;
+        }
+
+        /* DARK MODE TYPOGRAPHY */
+        /* DARK MODE BASE */
+        :root[data-theme="dark"] body {
+            background: black;
+            color: white;
+        }
+
+        /* SECTION TEXT */
+        :root[data-theme="dark"] .section {
+            color: white;
+        }
+
+        /* HEADINGS */
+        :root[data-theme="dark"] .section h1,
+        :root[data-theme="dark"] .section h2,
+        :root[data-theme="dark"] .section h3,
+        :root[data-theme="dark"] .section h4,
+        :root[data-theme="dark"] .section h5,
+        :root[data-theme="dark"] .section h6 {
+            color: white;
+        }
+
+     
+
+        /* GRID CONTENT (VERY IMPORTANT) */
+        :root[data-theme="dark"] .details-grid,
+        :root[data-theme="dark"] .details-text {
+            color: white;
+        }
+
+        /* BUTTON (Same behaviour as pricing buttons) */
+        :root[data-theme="dark"] .section button {
+            background: white;
+            color: #530C2D;
+        }
+
+        :root[data-theme="dark"] .section button:hover {
+            background: #904567;
+            color: white;
+        }
+
+        /* WATERMARK */
+        :root[data-theme="dark"] body::before {
+            opacity: 0.10;
+        }
+
+
+        /* GRID LAYOUT */
+        .details-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            text-align: left;
+        }
+
+        /* IMAGE */
+        .details-image img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
+        /* BUTTON */
+        .section button {
+            margin-top: 20px;
+            background: #530C2D;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+                border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+     
+
+        /* DARK MODE BUTTON */
+        html[data-theme="dark"] .section button {
+            background: #904567;
+            color: white;
+        }
+
+        html[data-theme="dark"] .section button:hover {
+            background: #530C2D;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .details-text {
+                text-align: center;
+            }
+        }
+
+        /* EXTRA SPACING CONTROL */
+        .section-styles {
+            padding: 40px;
+        }
+        .margin-styles{
+            margin-top: 90px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="site-header" class="fixed-top"></div>
+    <!-- SECTION 1 -->
+    <section class="section section-styles margin-styles">
+        <h1 class="primary">Coming Soon</h1>
+        <p class="secondary">
+            A new standard in property exploration is on its way. We are crafting
+            a modern real-estate experience focused on simplicity, precision,
+            and visual elegance.
+        </p>
+        <p class="secondary">
+            Designed to redefine how you discover spaces, our upcoming platform
+            blends intelligent navigation with a clean, immersive interface
+            tailored for modern lifestyles.
+        </p>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="section section-styles">
+
+        <div class="details-grid">
+
+            <div class="details-text">
+                <h2>Experience The Future of Real Estate</h2>
+
+                <p class="secondary">
+                    Discover thoughtfully curated properties, intelligent navigation,
+                    and a seamless browsing experience crafted for modern users.
+                </p>
+
+                <p class="secondary">
+                    Our platform is engineered to deliver effortless discovery,
+                    enabling navigation with speed, precision, and clarity
+                    across all devices.
+                </p>
+
+                <p class="secondary">
+                    We are shaping an interface where aesthetics meet functionality —
+                    providing smooth interactions and an intuitive browsing journey.
+                </p>
+
+               <a href="errorpage.html">
+                 <button>
+                    View Updates
+                </button>
+               </a>
+            </div>
+
+            <div class="details-image">
+                <img src="https://img.freepik.com/free-vector/abstract-grunge-style-coming-soon-with-black-splatter_1017-26690.jpg?semt=ais_wordcount_boost&w=740&q=80"
+                    alt="Coming Soon">
+            </div>
+
+        </div>
+    </section>
+
+    <div id="side-footer"></div>
+
+    <script src="footer.js"></script>
+    <script src="header.js"></script>
+
+    <!-- Bootstrap JS MUST come before custom navbar script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

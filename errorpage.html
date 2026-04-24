@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>404 - Page Not Found</title>
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #530C2D;
+    --secondary: #904567;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "JetBrains Mono", "Cascadia Code", monospace;
+    background: var(--white);
+    color: var(--primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* WATERMARK LOGO */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("logo.png") center / 300px no-repeat;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+/* DARK MODE */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: var(--primary);
+        color: var(--white);
+    }
+
+    body::before {
+        opacity: 0.07;
+    }
+}
+
+/* TYPOGRAPHY RULES */
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 22px; }
+h4 { font-size: 21px; }
+h5, h6 { font-size: 19px; }
+p, span { font-size: 17px; }
+a, li, button { font-size: 16px; }
+
+/* LAYOUT */
+.wrapper {
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+}
+
+/* VERTICAL SPACING RULE */
+.section > * {
+    margin-bottom: 40px;
+}
+
+.section > *:last-child {
+    margin-bottom: 0;
+}
+
+/* IMAGE */
+.error-image {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* BUTTON */
+.btn-home {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--secondary);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+
+
+
+/* DARK MODE BUTTON FIX */
+@media (prefers-color-scheme: dark) {
+    .btn-home {
+        background: var(--white);
+        color: var(--primary);
+    }
+
+    .btn-home:hover {
+        background: var(--secondary);
+        color: var(--white);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    h1 { font-size: 32px; }
+    h2 { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 21px; }
+    p, span { font-size: 17px; }
+}
+  /* WATERMARK / LOGO */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("images/transparent-logo-1.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 600px auto;
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        /* DARK MODE WATERMARK */
+        html[data-theme="dark"] body::before {
+            opacity: 0.10;
+        }
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+    <div class="section">
+
+        <img src="https://thumbs.dreamstime.com/b/error-page-not-found-illustration-sad-cartoon-document-red-text-white-background-image-depicts-frowning-face-x-434807036.jpg" alt="404 Error" class="error-image">
+        <h2>Page Not Found</h2>
+        <p>
+            The page you are looking for might have been removed,
+            renamed, or is temporarily unavailable.
+        </p>
+        <a href="index.html" class="btn-home">
+            Go Back
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
