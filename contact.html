@@ -566,6 +566,30 @@
                 padding: 0 15px;
             }
         }
+        /* ---------- DARK MODE INPUT TEXT COLOR ---------- */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] textarea.form-control,
+[data-theme="dark"] select.form-control {
+    color: #ffffff !important;
+}
+
+/* ---------- DARK MODE PLACEHOLDER COLOR ---------- */
+[data-theme="dark"] .form-control::placeholder,
+[data-theme="dark"] textarea.form-control::placeholder {
+    color: #e0e0e0 !important;
+    opacity: 1;
+}
+
+/* ---------- DARK MODE SELECT DROPDOWN PLACEHOLDER ---------- */
+[data-theme="dark"] select.form-control option {
+    background: #1e1e1e;
+    color: #ffffff;
+}
+
+[data-theme="dark"] select.form-control:invalid {
+    color: #e0e0e0 !important;
+}
     </style>
 </head>
 
