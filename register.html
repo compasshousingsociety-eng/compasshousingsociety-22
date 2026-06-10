@@ -139,12 +139,14 @@
         }
 
         .auth-header h1 {
-            color: var(--primary-dark);
+            
             margin-bottom: 15px;
             padding-bottom: 15px;
             font-weight: 700;
             position: relative;
         }
+
+        
 
         .auth-header p {
             max-width: 500px;
@@ -172,7 +174,7 @@
 
         .required {
             margin-left: 4px;
-            color: var(--primary-medium);
+            /* color: var(--primary-medium); */
         }
 
         .password-wrapper {
@@ -367,22 +369,17 @@
             margin-bottom: 5px;
         }
 
-        /* ---------- DARK MODE – same as original, only colours ---------- */
+        /* ---------- DARK MODUPDATED: placeholder and text color white, preserves all other existing styles ---------- */
         [data-theme="dark"] body {
             background: #121212;
         }
 
-     [data-theme="dark"] .auth-card {
-    background: rgba(30, 30, 30, 0.75);   /* keeps logo visible */
-    border-color: rgba(144, 69, 103, 0.25);
-
-    box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.35),   /* depth */
-        0 0 0 1px rgba(255, 255, 255, 0.04); /* subtle edge glow */
-    
-    backdrop-filter: blur(8px); /* optional but looks premium */
-}
-
+        [data-theme="dark"] .auth-card {
+            background: rgba(30, 30, 30, 0.75);
+            border-color: rgba(144, 69, 103, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+        }
 
         [data-theme="dark"] .auth-header h2 {
             color: var(--white);
@@ -396,19 +393,41 @@
             color: var(--white);
         }
 
+        /* CRITICAL UPDATE: Form controls in dark mode - white text and white placeholder without breaking existing structure */
+       
         [data-theme="dark"] .form-control {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--white);
-            color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.05);
+    /* color: var(--white) !important; */
+    border-color: var(--white);
+}
+        [data-theme="dark"] .form-control::placeholder {
+            color: #ffffff !important;
+            opacity: 0.85 !important;
         }
-
+        
+        /* Ensure input text remains white even during focus and typing */
         [data-theme="dark"] .form-control:focus {
+            color: #ffffff !important;
+            background: rgba(35, 35, 45, 0.9);
             border-color: #d4a5c0;
             box-shadow: 0 0 0 4px rgba(144, 69, 103, 0.2);
         }
+        
+        /* Keep validation states readable in dark mode */
+        [data-theme="dark"] .form-control.error {
+            background: rgba(220, 53, 69, 0.15);
+            color: #ffffff !important;
+            border-color: var(--error);
+        }
+        
+        [data-theme="dark"] .form-control.success {
+            background: rgba(40, 167, 69, 0.1);
+            color: #ffffff !important;
+            border-color: var(--success);
+        }
 
         [data-theme="dark"] .password-toggle {
-            color: var(--white);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         [data-theme="dark"] .password-toggle:hover {
@@ -434,6 +453,15 @@
 
         [data-theme="dark"] .popup-content p {
             color: #e0e0e0;
+        }
+        
+        /* Ensure any autofill styles in dark mode don't override white text */
+        [data-theme="dark"] input:-webkit-autofill,
+        [data-theme="dark"] input:-webkit-autofill:hover,
+        [data-theme="dark"] input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #ffffff !important;
+            -webkit-box-shadow: 0 0 0px 1000px rgba(35, 35, 45, 0.9) inset !important;
+            transition: background-color 5000s ease-in-out 0s;
         }
 
         /* responsive adjustments (same spirit) */
@@ -483,6 +511,7 @@
 input[type="password"]::-ms-clear {
     display: none;
 }
+
     </style>
 </head>
 
